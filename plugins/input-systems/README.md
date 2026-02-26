@@ -1,46 +1,41 @@
-# Input Systems
+# input-systems
 
-Input mapping, controller support, rebinding, gestures
+Input plugin for LibreGameDev. Covers Godot InputMap, Unity new Input System, gamepad deadzone mathematics, input buffering (jump buffer/coyote time), rebinding serialization, and mobile touch input.
 
-## What's Included
+## Components
 
-### Agents
-- **Input Engineer** - Specialized agent for Input mapping, controller support, rebinding, gestures
+- **input-engineer**: Agent with expertise in Godot InputMap, Unity Input Action Assets, deadzone math, buffering, and multi-platform input
+- **input-system**: Command for configuring, rebinding, testing feel, and polishing platform-specific input
+- **input-patterns**: Skill library with scaled radial deadzone, jump buffer + coyote time, InputMap configuration, rebinding serialization, virtual joystick, and rumble patterns
 
-### Commands
-- `/input-system` - Quick-access command for input-systems workflows
+## Core Principle
 
-### Skills
-- **Input Patterns** - Pattern library and knowledge base for input-systems
+All gameplay code polls actions by name, never by raw key/button:
+```gdscript
+# Always this:
+Input.is_action_pressed(&"jump")
+Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
+
+# Never this:
+Input.is_key_pressed(KEY_SPACE)
+Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
+```
+
+This makes rebinding, multi-platform support, and accessibility straightforward.
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Configure actions for a game:
 ```
-# Use the command directly
-/input-system analyze
-
-# Use the command with specific input
-/input-system generate --context "your project"
-
-# Reference patterns from the skill
-"Apply input-patterns patterns to this implementation"
+/input-system configure "platformer: move left/right, jump, attack, dash"
 ```
 
-## Key Patterns
+Fix unresponsive jump:
+```
+/input-system test "jump feels inconsistent, sometimes doesn't register"
+```
 
-- Follow established conventions for input-systems
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Add rebinding:
+```
+/input-system rebind "keybinding menu with conflict detection and save/load"
+```

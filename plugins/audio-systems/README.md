@@ -1,46 +1,52 @@
-# Audio Systems
+# audio-systems
 
-Sound design integration, music systems, spatial audio
+Audio plugin for LibreGameDev. Covers bus architecture, spatial audio, dynamic music systems, audio pooling, 3D occlusion, and FMOD/Wwise integration patterns.
 
-## What's Included
+## Scope
 
-### Agents
-- **Game Audio Engineer** - Specialized agent for Sound design integration, music systems, spatial audio
+Runtime audio implementation: how sounds are played, routed through buses, spatialized, and dynamically mixed. Does not cover audio production (DAW workflows, sound design) or asset compression (covered by asset-pipelines plugin).
 
-### Commands
-- `/game-audio` - Quick-access command for audio-systems workflows
+## Architecture Overview
 
-### Skills
-- **Audio Patterns** - Pattern library and knowledge base for audio-systems
+```
+Master Bus
+├── Music Bus (OGG streams, vertical stems)
+├── SFX Bus (pool of AudioStreamPlayer3D)
+│   ├── Footstep Bus (pitch-randomized pool)
+│   └── Combat Bus (impact, weapon, ability)
+├── Voice Bus (dialogue, narration)
+│   └── [Sidechains: ducks Music when active]
+└── Ambient Bus (environment loops, Area3D zones)
+    └── Reverb Send Bus (cave, indoor, outdoor presets)
+```
+
+## Components
+
+- **game-audio-engineer**: Agent with expertise in FMOD, Wwise, Godot audio, Unity AudioMixer, spatial audio, and dynamic music
+- **game-audio**: Command for designing, implementing, mixing, and optimizing audio systems
+- **audio-patterns**: Skill library with audio bus setup, audio pool, randomized SFX, vertical remixing, 3D occlusion, and FMOD integration patterns
+
+## Key Concepts
+
+- **Voice polyphony**: Maximum simultaneous sounds per category. Set budgets before implementation.
+- **Bus architecture**: Route sound categories to sub-buses for independent volume control, effects, and ducking
+- **Vertical remixing**: Multiple simultaneous music stems; mix layers in/out for dynamic feel
+- **Audio pooling**: Pre-allocate AudioStreamPlayers; never allocate per sound at runtime
+- **Spatial attenuation**: Every in-world sound needs max_distance set; Godot default 0 = no limit
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Design bus layout:
 ```
-# Use the command directly
-/game-audio analyze
-
-# Use the command with specific input
-/game-audio generate --context "your project"
-
-# Reference patterns from the skill
-"Apply audio-patterns patterns to this implementation"
+/game-audio design "audio bus layout for action RPG"
 ```
 
-## Key Patterns
+Implement audio pool:
+```
+/game-audio implement "16-voice SFX pool with priority stealing"
+```
 
-- Follow established conventions for audio-systems
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Set up dynamic music:
+```
+/game-audio implement "vertical stem music system for combat/exploration"
+```

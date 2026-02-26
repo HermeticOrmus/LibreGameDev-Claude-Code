@@ -1,46 +1,44 @@
-# Monetization Ethics
+# monetization-ethics
 
-Ethical monetization, fair F2P, cosmetics, no pay-to-win
+Monetization ethics plugin for LibreGameDev. Covers dark pattern identification, ethical monetization model design, IAP implementation, battle pass ethics, and player spending protections.
 
-## What's Included
+## Core Principle
 
-### Agents
-- **Monetization Advisor** - Specialized agent for Ethical monetization, fair F2P, cosmetics, no pay-to-win
+Every monetization decision must pass: "Does this empower players or extract from them?"
 
-### Commands
-- `/monetize` - Quick-access command for monetization-ethics workflows
+Extraction (dark patterns) destroys player trust and creates regulatory risk. Ethical monetization builds long-term relationships and sustainable revenue.
 
-### Skills
-- **Ethical Monetization Patterns** - Pattern library and knowledge base for monetization-ethics
+## Dark Patterns Reference
+
+| Pattern | What it does | Ethical alternative |
+|---------|-------------|-------------------|
+| FOMO countdown | Creates false urgency | Remove timer from non-scarce goods |
+| Artificial scarcity | "Only 3 left!" on infinite digital goods | Honest supply statements |
+| Pay-to-win | Money = power advantage | Cosmetics-only; no stat purchases |
+| Loot boxes (undisclosed) | Hidden probabilities | Show exact odds (legally required in EU) |
+| Premium currency obfuscation | Hides real cost | Show real price alongside currency |
+| Roach motel | Easy to start, hard to cancel | 2-click cancellation |
+| Orphan coins | Bundles leave unusable remainder | Bundles match item prices exactly |
+
+## Components
+
+- **monetization-advisor**: Agent who evaluates monetization through both ethics and business lens, citing academic dark pattern research
+- **monetize**: Command for designing, auditing, implementing, and testing monetization systems
+- **ethical-monetization-patterns**: Skill library with dark pattern audit checklist, cosmetics-only store, ethical battle pass, IAP confirmation flow, and voluntary spending limits
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Audit existing monetization:
 ```
-# Use the command directly
-/monetize analyze
-
-# Use the command with specific input
-/monetize generate --context "your project"
-
-# Reference patterns from the skill
-"Apply ethical-monetization-patterns patterns to this implementation"
+/monetize audit "our current IAP store and currency system"
 ```
 
-## Key Patterns
+Design ethical F2P:
+```
+/monetize design "free-to-play mobile game"
+```
 
-- Follow established conventions for monetization-ethics
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Implement IAP:
+```
+/monetize implement "Steam cosmetics store with purchase confirmation"
+```

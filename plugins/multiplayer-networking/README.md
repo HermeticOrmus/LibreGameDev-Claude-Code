@@ -1,46 +1,44 @@
-# Multiplayer Networking
+# multiplayer-networking
 
-Netcode, client-server, state sync, lag compensation
+Multiplayer networking plugin for LibreGameDev. Covers Godot High-Level Multiplayer API, MultiplayerSynchronizer, client-side prediction, server reconciliation, rollback netcode concepts, lag compensation, and authoritative server architecture.
 
-## What's Included
+## Components
 
-### Agents
-- **Netcode Engineer** - Specialized agent for Netcode, client-server, state sync, lag compensation
+- **netcode-engineer**: Agent with expertise in Godot HLMP, rollback netcode, client prediction, interpolation, lag compensation, and architecture by genre
+- **multiplayer**: Command for host/connect setup, state sync design, and debugging
+- **netcode-patterns**: Skill library with MultiplayerSynchronizer setup, client-side prediction with reconciliation, entity interpolation, ENet host/client setup
 
-### Commands
-- `/multiplayer` - Quick-access command for multiplayer-networking workflows
+## Architecture by Genre
 
-### Skills
-- **Netcode Patterns** - Pattern library and knowledge base for multiplayer-networking
+| Genre | Architecture | Godot Tools |
+|-------|-------------|-------------|
+| Co-op action | Server-authoritative + client prediction | ENet + MultiplayerSynchronizer |
+| Fighting game | Rollback netcode | Custom rollback + ENet |
+| Strategy/RTS | Lockstep deterministic | ENet + input broadcast |
+| Casual co-op | Peer-to-peer host | Godot HLMP ENet |
+| MMO-lite | Authoritative server + interest zones | Dedicated server |
+
+## Security First
+
+Multiplayer games are hacked. Always:
+- Server validates all inputs (never trust client position/damage)
+- Rate-limit client RPCs (prevent flood attacks)
+- Validate all numerical inputs (reject NaN, Inf, >max values)
+- Authority checks before any game state mutation
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Host a co-op game:
 ```
-# Use the command directly
-/multiplayer analyze
-
-# Use the command with specific input
-/multiplayer generate --context "your project"
-
-# Reference patterns from the skill
-"Apply netcode-patterns patterns to this implementation"
+/multiplayer host "Godot 4 co-op game for 2-4 players over LAN"
 ```
 
-## Key Patterns
+Add client prediction:
+```
+/multiplayer sync "player movement with client-side prediction"
+```
 
-- Follow established conventions for multiplayer-networking
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Debug desync:
+```
+/multiplayer debug "game state differs between host and client after 1 minute"
+```

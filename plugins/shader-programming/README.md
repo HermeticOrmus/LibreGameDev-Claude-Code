@@ -1,46 +1,47 @@
-# Shader Programming
+# shader-programming
 
-Vertex/fragment shaders, visual effects, post-processing
+Shader programming plugin for LibreGameDev. Covers Godot's shading language (GLSL-based), spatial/canvas_item/particles pipelines, vertex and fragment stage techniques, common visual effects (dissolve, outline, fresnel, water, hologram, pixelate), post-processing, render modes, and GPU performance optimization.
 
-## What's Included
+## Effect Quick Reference
 
-### Agents
-- **Shader Programmer** - Specialized agent for Vertex/fragment shaders, visual effects, post-processing
+| Effect | Shader Type | Key Technique |
+|--------|-------------|---------------|
+| Dissolve with glowing edge | spatial | Noise `discard` + edge `EMISSION` |
+| 2D outline | canvas_item | 8-neighbor alpha sample |
+| Hologram | spatial | Fresnel + scan lines + `blend_add` |
+| Water surface | spatial | Normal map scroll + vertex wave |
+| Pixelate | canvas_item | Floor UV to grid |
+| Hit flash | spatial | Mix albedo with white via uniform |
+| Cel shading | spatial | `step()` on light dot product |
+| Heat distortion | canvas_item | SCREEN_UV offset by noise |
 
-### Commands
-- `/shader` - Quick-access command for shader-programming workflows
+## Components
 
-### Skills
-- **Shader Patterns** - Pattern library and knowledge base for shader-programming
+- **shader-programmer**: Agent with expertise in Godot shading language, vertex/fragment stages, render modes, effect techniques, post-processing, and GPU performance
+- **shader**: Command for writing new shaders, debugging render issues, optimizing GPU cost, and extending existing shaders
+- **shader-patterns**: Skill library with dissolve (spatial), outline (canvas_item), fresnel/hologram, scrolling water with vertex waves, pixelate post-process, and GDScript parameter control via ShaderMaterial
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Create an effect shader:
 ```
-# Use the command directly
-/shader analyze
-
-# Use the command with specific input
-/shader generate --context "your project"
-
-# Reference patterns from the skill
-"Apply shader-patterns patterns to this implementation"
+/shader write "enemy flashes red when taking damage, returns to normal after 0.2 seconds"
 ```
 
-## Key Patterns
+Debug rendering issues:
+```
+/shader debug "shader looks correct in editor but black on mobile build"
+```
 
-- Follow established conventions for shader-programming
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
+Optimize a heavy shader:
+```
+/shader optimize "fragment shader doing 6 texture samples and conditional branching"
+```
 
-## Related Plugins
+## Godot Render Pipelines
 
-Check the main README for related plugins in this collection.
+- **Forward+**: Desktop; full feature set including SDFGI, SSR, SSAO, volumetric fog
+- **Mobile**: Reduced feature set; no SDFGI; targets mobile GPU constraints
+- **Compatibility**: OpenGL ES 3.0; broadest compatibility; no compute shaders
+
+Shaders written for Forward+ may not work on Compatibility. Test on target renderer.

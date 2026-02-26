@@ -1,46 +1,38 @@
-# Godot Development
+# godot-development
 
-GDScript, Godot nodes, scenes, signals, resources
+Godot 4 plugin for LibreGameDev. Covers typed GDScript, scene/node architecture, signals, Resources, physics bodies, GDExtension, and GUT testing.
 
-## What's Included
+## Godot 4 vs Godot 3 Differences
 
-### Agents
-- **Godot Developer** - Specialized agent for GDScript, Godot nodes, scenes, signals, resources
+| Feature | Godot 3 | Godot 4 |
+|---------|---------|---------|
+| Script language | GDScript 1.0 | GDScript 2.0 (typed, static) |
+| Renderer | VisualServer | RenderingServer |
+| Physics | PhysicsServer | PhysicsServer3D / 2D |
+| Native extensions | GDNative | GDExtension |
+| Signals | `connect("signal", self, "_on_signal")` | `signal_name.connect(_on_signal)` |
+| Node references | `$` (untyped) | `@onready var n: Type = $Node` |
+| Character movement | `move_and_collide()` | `move_and_slide()` with `velocity` property |
 
-### Commands
-- `/godot` - Quick-access command for godot-development workflows
+## Components
 
-### Skills
-- **Godot Patterns** - Pattern library and knowledge base for godot-development
+- **godot-developer**: Agent expert in Godot 4 GDScript, scene architecture, physics, signals, Resources, and GUT
+- **godot**: Command for scene design, GDScript generation, GDExtension, and GUT testing
+- **godot-patterns**: Skill library with typed GDScript templates, scene inheritance, autoloads, object pooling, signal-based components, and GUT tests
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Generate a character controller:
 ```
-# Use the command directly
-/godot analyze
-
-# Use the command with specific input
-/godot generate --context "your project"
-
-# Reference patterns from the skill
-"Apply godot-patterns patterns to this implementation"
+/godot script "CharacterBody3D third-person movement with jump and gravity"
 ```
 
-## Key Patterns
+Design a scene structure:
+```
+/godot scene "enemy character with health, detection area, and patrol"
+```
 
-- Follow established conventions for godot-development
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Write GUT tests:
+```
+/godot test "HealthComponent damage, healing, and death signal"
+```

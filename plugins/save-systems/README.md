@@ -1,46 +1,46 @@
-# Save Systems
+# save-systems
 
-Save/load, serialization, cloud saves, data migration
+Save system plugin for LibreGameDev. Covers JSON/binary serialization, save schema versioning and migration, atomic write patterns (tmp+rename), save slot design, slot metadata for UI, settings persistence, and platform cloud saves.
 
-## What's Included
+## Core Principles
 
-### Agents
-- **Save System Engineer** - Specialized agent for Save/load, serialization, cloud saves, data migration
+1. **Version every save file** - `"version": 1` from day one. Every schema change = version increment + migration function.
+2. **Atomic writes** - Write to `.tmp`, rename to final. A crash during write leaves the original intact.
+3. **Keep backup** - Copy previous save to `.bak` before overwriting. Offer restore on corruption.
+4. **Separate settings from saves** - Resetting settings must not lose game progress.
+5. **Never save node references** - Save data values (health: 80), not node pointers.
 
-### Commands
-- `/save-system` - Quick-access command for save-systems workflows
+## Components
 
-### Skills
-- **Save System Patterns** - Pattern library and knowledge base for save-systems
+- **save-system-engineer**: Agent with expertise in serialization tradeoffs, versioning/migration strategy, atomic writes, slot design by genre, and platform cloud save APIs
+- **save-system**: Command for designing save architecture, generating serialization code, adding migration chains, and debugging corruption
+- **save-system-patterns**: Skill library with SaveManager (atomic write, migration chain, backup restore), PlayerSaveData (to_dict/from_dict), SaveSlotMeta (lightweight UI metadata), and GameSettings (ConfigFile-based)
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Design a save system for your game type:
 ```
-# Use the command directly
-/save-system analyze
-
-# Use the command with specific input
-/save-system generate --context "your project"
-
-# Reference patterns from the skill
-"Apply save-system-patterns patterns to this implementation"
+/save-system design "2D action RPG: 3 save slots, autosave at doors, player position + inventory + quest flags"
 ```
 
-## Key Patterns
+Implement save data model:
+```
+/save-system implement "player health, position, inventory as string array, and collected_flags dictionary"
+```
 
-- Follow established conventions for save-systems
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
+Add migration for a schema change:
+```
+/save-system migrate "added 'stamina' field in v2 that old saves don't have"
+```
 
-## Related Plugins
+## File Layout
 
-Check the main README for related plugins in this collection.
+```
+user://
+  save_0.json      <- Slot 0 (current)
+  save_0.json.bak  <- Slot 0 backup (previous save)
+  save_0.json.tmp  <- Slot 0 in-progress write (deleted on success)
+  save_1.json
+  save_2.json
+  settings.cfg     <- Separate from game saves
+```

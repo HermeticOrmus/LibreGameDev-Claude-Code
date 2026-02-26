@@ -1,46 +1,44 @@
-# Playtesting
+# playtesting
 
-Playtest planning, feedback collection, analytics, iteration
+Playtesting plugin for LibreGameDev. Covers session design protocols, quantitative data collection (death heatmaps, zone timers, funnel analytics), A/B testing for game balance, and interpreting behavioral data to drive design iteration.
 
-## What's Included
+## When to Playtest
 
-### Agents
-- **Playtest Coordinator** - Specialized agent for Playtest planning, feedback collection, analytics, iteration
+| Signal | Action |
+|--------|--------|
+| "Is the tutorial clear?" | Observation session: silent, 5 testers, count coaching requests |
+| "Is this section too hard?" | Death heatmap + attempts-per-obstacle + exit survey |
+| "Which version feels better?" | A/B test with minimum 30 per group, single variable |
+| "Why do players quit?" | Funnel analytics + debrief: "what was the most confusing moment?" |
+| Pre-launch readiness | Full session: tutorial -> end, completion rate target > 70% |
 
-### Commands
-- `/playtest` - Quick-access command for playtesting workflows
+## Components
 
-### Skills
-- **Playtest Patterns** - Pattern library and knowledge base for playtesting
+- **playtest-coordinator**: Agent with expertise in session protocols, observation vs think-aloud, funnel analysis, recruitment, A/B testing methodology, and finding prioritization
+- **playtest**: Command for designing sessions, instrumenting analytics, analyzing results, and generating reports
+- **playtest-patterns**: Skill library with DeathHeatmap (Vector2i accumulation, color gradient render), GameAnalytics (JSONL event log, typed event methods), ZoneTimer, playtest session guide template, and ABTest (deterministic per-player assignment)
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Design a session:
 ```
-# Use the command directly
-/playtest analyze
-
-# Use the command with specific input
-/playtest generate --context "your project"
-
-# Reference patterns from the skill
-"Apply playtest-patterns patterns to this implementation"
+/playtest design "first external playtest - 2D action game, tutorial + first level, 8 testers"
 ```
 
-## Key Patterns
+Add death tracking:
+```
+/playtest instrument "death heatmap overlay for 2D platformer with 32px cells"
+```
 
-- Follow established conventions for playtesting
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
+Analyze what you found:
+```
+/playtest analyze "7 of 8 testers missed the double jump entirely in first room"
+```
 
-## Related Plugins
+## Recruitment Rule
 
-Check the main README for related plugins in this collection.
+Do not test with developer friends. They know the game, know you, and provide systematically optimistic feedback. Recruit strangers matching your target demographic. Nielsen's rule: 5 users find ~85% of usability issues. Run 8-10 for confidence.
+
+## Session Length
+
+45-90 minutes. Beyond 90 minutes, fatigue skews results toward negativity. Keep debrief to 15 minutes max.

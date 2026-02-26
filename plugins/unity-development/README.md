@@ -1,46 +1,50 @@
-# Unity Development
+# unity-development
 
-C# Unity, MonoBehaviour, ScriptableObjects, DOTS
+Unity development plugin for LibreGameDev. Covers C# MonoBehaviour lifecycle, component architecture, ScriptableObject systems (event channels, item databases, game settings), Unity's new Input System, Rigidbody physics, Animator state machines, DOTS/ECS, Addressable Assets, and C# performance patterns.
 
-## What's Included
+## MonoBehaviour Lifecycle
 
-### Agents
-- **Unity Developer** - Specialized agent for C# Unity, MonoBehaviour, ScriptableObjects, DOTS
+```
+Awake → OnEnable → Start → [FixedUpdate → Update → LateUpdate] → OnDisable → OnDestroy
+```
 
-### Commands
-- `/unity` - Quick-access command for unity-development workflows
+| Method | Rule |
+|--------|------|
+| `Awake` | Cache `GetComponent`, self-init only |
+| `Start` | Cross-component init (after all Awake) |
+| `OnEnable`/`OnDisable` | Subscribe/unsubscribe events |
+| `FixedUpdate` | All Rigidbody physics |
+| `Update` | Input, visual updates |
+| `LateUpdate` | Camera, IK post-processing |
 
-### Skills
-- **Unity Patterns** - Pattern library and knowledge base for unity-development
+## Components
+
+- **unity-developer**: Agent with expertise in MonoBehaviour lifecycle, ScriptableObject architecture, new Input System, physics configuration, Animator, DOTS, and C# performance
+- **unity**: Command for building scenes, designing ScriptableObject systems, implementing Input System, and debugging Unity-specific issues
+- **unity-patterns**: Skill library with PlayerController (Rigidbody, FixedUpdate), ScriptableObject event channels (Ryan Hipple pattern), ItemDatabaseSO, new Input System integration with cached hashes, and generic ObjectPool<T>
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Create a character controller:
 ```
-# Use the command directly
-/unity analyze
-
-# Use the command with specific input
-/unity generate --context "your project"
-
-# Reference patterns from the skill
-"Apply unity-patterns patterns to this implementation"
+/unity scene "3D player: WASD movement, jump, sprint - rigidbody physics"
 ```
 
-## Key Patterns
+Set up event architecture:
+```
+/unity scriptable "game event channels: health changed, player died, level complete"
+```
 
-- Follow established conventions for unity-development
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
+Implement input:
+```
+/unity input "new Input System player actions: move, jump, dash, attack"
+```
 
-## Related Plugins
+## ScriptableObject Architecture
 
-Check the main README for related plugins in this collection.
+Prefer ScriptableObject-based architecture over singletons:
+- **Event channels** instead of direct script references
+- **Item/enemy definitions** instead of prefab-hardcoded values
+- **Game settings** instead of PlayerPrefs scattered across scripts
+
+See Ryan Hipple's "Game Architecture with Scriptable Objects" (Unite Austin 2017) for the full pattern.

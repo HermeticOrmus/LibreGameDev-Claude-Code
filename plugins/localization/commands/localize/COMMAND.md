@@ -1,87 +1,90 @@
 # /localize
 
-A quick-access command for localization workflows in Claude Code.
+Game localization: string extraction, PO file management, plural forms, RTL support, and CJK font setup.
 
 ## Trigger
 
-`/localize [action] [options]`
+`/localize [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing localization implementation
-- `generate` - Generate new localization artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for localization artifacts
+### `extract`
+Audit codebase for localizable strings and extract to POT template.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of localization artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against localization-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Localization - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/localize extract "scan GDScript files for hardcoded strings not wrapped in tr()"
+/localize extract "generate POT file from all tr() and tr_n() calls"
+/localize extract "find strings concatenated with variables"
 ```
 
-### Error
-```
-## Localization - [Action] Failed
+**Output**: List of untranslated strings with file/line, POT file template, code fixes for concatenation issues.
 
-### Issue
-[Description of the problem]
+### `translate`
+Generate or validate PO translation files.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/localize translate "create French PO file structure from English POT"
+/localize translate "add Japanese locale with CJK font configuration"
+/localize translate "validate Russian PO file plural forms (3 forms required)"
+```
+
+**Output**: PO file structure, plural form header for target language, validation checklist.
+
+### `test`
+Set up localization testing and pseudo-localization.
+
+```
+/localize test "enable pseudo-localization to find untranslated strings"
+/localize test "validate Arabic RTL layout"
+/localize test "test German locale for UI overflow"
+```
+
+**Output**: Pseudo-localization setup, RTL test checklist, layout expansion testing guide.
+
+### `ship`
+Prepare localization artifacts for release.
+
+```
+/localize ship "generate translation CSV from PO files for Godot"
+/localize ship "font fallback chain covering 8 target locales"
+/localize ship "locale selector UI with flag icons"
+```
+
+**Output**: CSV generation script, font setup code, locale selector Control implementation.
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/localize analyze
-
-# Generate new artifacts
-/localize generate --context ./src
-
-# Validate against best practices
-/localize validate --verbose
-
-# Generate documentation
-/localize document --format markdown
+**Finding untranslated strings:**
 ```
+/localize extract "find all hardcoded English strings in res://ui/"
+```
+Search pattern: strings in quotes not preceded by `tr(` or `tr_n(`. Produces regex for Grep + list of violations.
+
+**Adding Japanese localization:**
+```
+/localize translate "add Japanese locale with proper CJK font fallback"
+```
+Produces:
+- `messages.ja.po` template with correct header `Plural-Forms: nplurals=1; plural=0;` (Japanese has 1 plural form)
+- Font setup loading NotoSansCJK-Regular.ttf as fallback
+- RTL: false (Japanese is LTR)
+- Line height compensation for CJK taller characters
+
+**Plural forms by language:**
+```
+/localize translate "add Polish locale with correct plural forms"
+```
+Polish has 4 forms: 1, 2-4 (but not 12-14), 5-21 (and 12-14), other. Produces header + msgstr[0-3] structure.
+
+## Plural Forms Reference
+
+| Language | Forms | Rule |
+|----------|-------|------|
+| English | 2 | n != 1 |
+| French | 2 | n > 1 |
+| German | 2 | n != 1 |
+| Russian | 3 | complex (n%10==1, n%10 in 2-4, rest) |
+| Polish | 4 | very complex |
+| Japanese | 1 | always plural[0] |
+| Arabic | 6 | zero, one, two, few, many, other |
+| Chinese | 1 | always plural[0] |

@@ -1,87 +1,87 @@
 # /save-system
 
-A quick-access command for save-systems workflows in Claude Code.
+Save file architecture, serialization, versioning, migration, and platform cloud saves for Godot games.
 
 ## Trigger
 
-`/save-system [action] [options]`
+`/save-system [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing save-systems implementation
-- `generate` - Generate new save-systems artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for save-systems artifacts
+### `design`
+Architect a save system for a specific game type.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of save-systems artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against save-system-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Save Systems - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/save-system design "RPG with 3 save slots, manual saves, and autosave at checkpoints"
+/save-system design "roguelike: single save file, delete on death, save on exit"
+/save-system design "open world: frequent autosave + manual slots + Steam Cloud"
 ```
 
-### Error
-```
-## Save Systems - [Action] Failed
+**Output**: Save data schema, slot design rationale, autosave trigger points, file format recommendation.
 
-### Issue
-[Description of the problem]
+### `implement`
+Generate save/load code.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/save-system implement "player position, health, inventory array, and quest flags"
+/save-system implement "settings file separate from game save"
+/save-system implement "save slot metadata for UI (level name, playtime, date)"
+```
+
+**Output**: Typed GDScript with `to_dict()` / `from_dict()`, atomic write with tmp+rename, version field.
+
+### `migrate`
+Add versioning or migration to an existing save system.
+
+```
+/save-system migrate "added new 'stamina' stat in v2 that didn't exist in v1"
+/save-system migrate "renamed 'hp' to 'health' and added 'max_health' field"
+/save-system migrate "moved audio settings from game save into separate settings file"
+```
+
+**Output**: Migration function chain, version bump, backward compatibility handler, test procedure.
+
+### `debug`
+Diagnose save system problems.
+
+```
+/save-system debug "save file sometimes empty on game crash"
+/save-system debug "loading old save throws error after adding new inventory system"
+/save-system debug "settings reset whenever player starts new game"
+```
+
+**Output**: Root cause, fix code, prevention strategy.
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/save-system analyze
-
-# Generate new artifacts
-/save-system generate --context ./src
-
-# Validate against best practices
-/save-system validate --verbose
-
-# Generate documentation
-/save-system document --format markdown
+**Implementing a complete save system:**
 ```
+/save-system implement "2D platformer save: player position, health, collected items (Array), level, playtime"
+```
+Produces: `PlayerSaveData` with `to_dict()`/`from_dict()`, `SaveManager` with atomic write, version=1, slot 0-2 support.
+
+**Migrating from v1 to v2:**
+```
+/save-system migrate "v1 had 'max_hp: 100', v2 renames to 'max_health' and adds 'stamina: 100'"
+```
+Produces: `_migrate_v1_to_v2()` function that renames key, adds missing key with default, bumps version.
+
+**Diagnosing corrupt save on crash:**
+```
+/save-system debug "save file is empty or truncated when game crashes during save"
+```
+Root cause: writing directly to save path; crash during write truncates file. Fix: write to `.tmp`, rename to final path (atomic).
+
+## Save Format Decision Table
+
+| Game Type | Format | Slots | Autosave |
+|-----------|--------|-------|---------|
+| Indie story game | JSON | 3 manual | Checkpoints |
+| Roguelike | JSON | 1 (run = slot) | Exit only |
+| Open world | JSON | 3 + autosave | Every 3 min + transitions |
+| Mobile game | JSON + cloud | 1 (cloud sync) | Constant |
+| High-performance PC | Binary | 3 | Frequent |
+
+## Versioning Rule
+
+Every save file ships with version=1. Every schema change increments the version. Migration functions handle every version transition. This is non-negotiable - without it, the first schema change corrupts all existing saves.

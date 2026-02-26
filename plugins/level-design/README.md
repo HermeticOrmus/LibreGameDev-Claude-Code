@@ -1,46 +1,30 @@
-# Level Design
+# level-design
 
-Level layout, tile maps, world building, environmental storytelling
+Level design plugin for LibreGameDev. Covers greyboxing workflow, Godot TileMap/TileSet, NavMesh baking, zone streaming, modular kit design, and environmental storytelling.
 
-## What's Included
+## Design Principle
 
-### Agents
-- **Level Designer** - Specialized agent for Level layout, tile maps, world building, environmental storytelling
+Greybox before art. Test before polish. Every level starts as boxes and gets art only after the space works as gameplay.
 
-### Commands
-- `/level-design` - Quick-access command for level-design workflows
+## Components
 
-### Skills
-- **Level Design Patterns** - Pattern library and knowledge base for level-design
+- **level-designer**: Agent with expertise in greyboxing, TileMap, NavMesh, streaming, and environmental storytelling
+- **level-design**: Command for greybox planning, tile configuration, nav setup, and zone export
+- **level-design-patterns**: Skill library with TileMap code, NavigationRegion3D configuration, level streaming, zone triggers, and CSG greybox workflow
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Plan a dungeon layout:
 ```
-# Use the command directly
-/level-design analyze
-
-# Use the command with specific input
-/level-design generate --context "your project"
-
-# Reference patterns from the skill
-"Apply level-design-patterns patterns to this implementation"
+/level-design greybox "dungeon: 5 rooms, 3 corridors, boss chamber at end"
 ```
 
-## Key Patterns
+Configure TileMap terrain:
+```
+/level-design tile "2D platformer with grass/dirt/water autotile terrain"
+```
 
-- Follow established conventions for level-design
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Set up NavMesh for AI:
+```
+/level-design nav "configure NavMesh for humanoid enemies in indoor level"
+```

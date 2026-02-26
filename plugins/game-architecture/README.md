@@ -1,46 +1,46 @@
-# Game Architecture
+# game-architecture
 
-Game loop design, ECS, component systems, scene management
+Game architecture plugin for LibreGameDev. Covers game loop patterns, ECS composition, event systems, Resource/ScriptableObject data architecture, service locator, and scene management.
 
-## What's Included
+## Core References
 
-### Agents
-- **Game Architect** - Specialized agent for Game loop design, ECS, component systems, scene management
+- "Game Programming Patterns" - Robert Nystrom (free at gameprogrammingpatterns.com)
+- "Fix Your Timestep!" - Glenn Fiedler (gafferongames.com)
+- Unity DOTS ECS documentation
+- EnTT ECS library documentation
 
-### Commands
-- `/game-arch` - Quick-access command for game-architecture workflows
+## Pattern Selection Guide
 
-### Skills
-- **Game Arch Patterns** - Pattern library and knowledge base for game-architecture
+| Symptom | Pattern to Apply |
+|---------|-----------------|
+| Scripts depend on node paths | Signal wiring or Service Locator |
+| Same data in multiple scripts | Resource/ScriptableObject |
+| Cross-scene communication breaks | EventBus autoload |
+| Physics behavior framerate-dependent | Fixed Timestep (use _physics_process) |
+| 500+ objects updating per frame | ECS / batch systems |
+| Singleton dependency web | Service Locator with registration |
+| Scene transition state lost | Game State Stack |
+| God script >300 lines | Component decomposition |
+
+## Components
+
+- **game-architect**: Agent with expertise in game loop patterns, ECS, event systems, and Nystrom's pattern catalog
+- **game-arch**: Command for designing, refactoring, testing, and profiling game systems
+- **game-arch-patterns**: Skill library with fixed timestep loop, EventBus, ECS composition, Resource data, Service Locator, and Game State Stack
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Design a new system:
 ```
-# Use the command directly
-/game-arch analyze
-
-# Use the command with specific input
-/game-arch generate --context "your project"
-
-# Reference patterns from the skill
-"Apply game-arch-patterns patterns to this implementation"
+/game-arch design "inventory with items, equipment, and crafting"
 ```
 
-## Key Patterns
+Refactor a god script:
+```
+/game-arch refactor "Player.gd is 400 lines handling everything"
+```
 
-- Follow established conventions for game-architecture
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Write testable code:
+```
+/game-arch test "health and damage system with GUT"
+```

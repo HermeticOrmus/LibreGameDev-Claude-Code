@@ -1,87 +1,94 @@
 # /assets
 
-A quick-access command for asset-pipelines workflows in Claude Code.
+Asset import, optimization, atlasing, LOD, and compression pipeline management.
 
 ## Trigger
 
-`/assets [action] [options]`
+`/assets [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing asset-pipelines implementation
-- `generate` - Generate new asset-pipelines artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for asset-pipelines artifacts
+### `import`
+Configure import settings for a specific asset type or directory.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of asset-pipelines artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against asset-pipeline-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Asset Pipelines - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/assets import "environment textures need VRAM compression with mipmaps"
+/assets import "UI sprites no mipmaps, RGBA8 lossless"
+/assets import "music files as OGG streaming with loop points"
+/assets import "FBX character with embedded animations"
 ```
 
-### Error
-```
-## Asset Pipelines - [Action] Failed
+**Output**: Godot .import parameter block or Unity AssetPostprocessor C# snippet.
 
-### Issue
-[Description of the problem]
+### `atlas`
+Design texture atlas layout and packing strategy.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/assets atlas "100 character portraits 128x128 each, mobile target"
+/assets atlas "TileMap tileset 32x32 tiles with 2px padding"
+/assets atlas "UI elements grouped by screen"
+```
+
+**Output**: Atlas dimensions, packing algorithm recommendation, Godot TileSet or Unity Sprite Atlas configuration.
+
+### `optimize`
+Audit and reduce asset memory footprint.
+
+```
+/assets optimize "texture memory budget exceeded on mobile"
+/assets optimize "audio takes too much RAM"
+/assets optimize "3D models have no LODs"
+```
+
+**Output**: Per-category breakdown, compression format recommendations, estimated savings.
+
+### `bundle`
+Structure assets for Addressables (Unity) or dynamic loading (Godot).
+
+```
+/assets bundle "separate loading screen assets from gameplay assets"
+/assets bundle "DLC content packs with remote delivery"
+/assets bundle "scene-specific preload groups"
+```
+
+**Output**: Asset group structure, loading code, dependency graph considerations.
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/assets analyze
-
-# Generate new artifacts
-/assets generate --context ./src
-
-# Validate against best practices
-/assets validate --verbose
-
-# Generate documentation
-/assets document --format markdown
+**Environment texture import (Godot):**
 ```
+/assets import "res://assets/textures/environment/ - all PNG files"
+```
+Produces `.import` parameter block:
+```ini
+[params]
+compress/mode=3
+compress/high_quality=true
+mipmaps/generate=true
+roughness/mode=1
+```
+Plus editor script to batch-apply to directory.
+
+**Texture memory audit:**
+```
+/assets optimize "game uses 800MB texture RAM on mobile, budget is 256MB"
+```
+Produces: Per-format VRAM cost table, priority list of which textures to downscale or recompress, estimated result.
+
+**Build-time validation:**
+```
+/assets bundle "add CI check for oversized assets"
+```
+Produces: Shell script + Godot headless validation pass.
+
+## Compression Format Reference
+
+| Format | Platform | Use Case | Notes |
+|--------|----------|----------|-------|
+| BC7 | Desktop (DX11+) | Color textures | Best quality, 8bpp |
+| BC5 | Desktop | Normal maps | 2-channel RG, 8bpp |
+| ASTC 4x4 | Mobile | High-quality color | 8bpp, iOS 7+/Android |
+| ASTC 6x6 | Mobile | Balanced color | 3.56bpp |
+| ETC2 | Android GL | Color+alpha | OpenGL ES 3.0 |
+| DXT1/BC1 | Desktop | Opaque color | 4bpp, no alpha |
+| Lossless | Any | UI, icons <512px | No compression artifacts |

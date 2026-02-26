@@ -1,87 +1,87 @@
 # /multiplayer
 
-A quick-access command for multiplayer-networking workflows in Claude Code.
+Multiplayer networking: host/connect setup, state synchronization, client-side prediction, and debugging.
 
 ## Trigger
 
-`/multiplayer [action] [options]`
+`/multiplayer [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing multiplayer-networking implementation
-- `generate` - Generate new multiplayer-networking artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for multiplayer-networking artifacts
+### `host`
+Set up game hosting infrastructure.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of multiplayer-networking artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against netcode-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Multiplayer Networking - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/multiplayer host "Godot ENet co-op game for 2-8 players"
+/multiplayer host "dedicated server with headless Godot instance"
+/multiplayer host "Steam P2P lobby with relay fallback"
 ```
 
-### Error
-```
-## Multiplayer Networking - [Action] Failed
+**Output**: NetworkManager GDScript, ENet/WebSocket configuration, player spawning on connect.
 
-### Issue
-[Description of the problem]
+### `connect`
+Implement client connection and session joining.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/multiplayer connect "lobby browser with LAN discovery"
+/multiplayer connect "direct IP connect with port"
+/multiplayer connect "Steam lobby join via invite"
+```
+
+**Output**: Client connection code, connection state machine, error handling for failed connections.
+
+### `sync`
+Design state synchronization for game objects.
+
+```
+/multiplayer sync "player position with client-side prediction"
+/multiplayer sync "game state (score, round timer) authoritative broadcast"
+/multiplayer sync "inventory items with reliable ordered delivery"
+```
+
+**Output**: MultiplayerSynchronizer configuration, RPC design, reliability mode selection.
+
+### `debug`
+Diagnose multiplayer bugs and desync issues.
+
+```
+/multiplayer debug "remote players teleporting on high latency"
+/multiplayer debug "game desyncs after 2 minutes of play"
+/multiplayer debug "host leaves and game crashes for all clients"
+```
+
+**Output**: Root cause analysis, fix code, testing methodology.
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/multiplayer analyze
-
-# Generate new artifacts
-/multiplayer generate --context ./src
-
-# Validate against best practices
-/multiplayer validate --verbose
-
-# Generate documentation
-/multiplayer document --format markdown
+**Client-side prediction for movement:**
 ```
+/multiplayer sync "player movement with prediction for 100ms latency"
+```
+Produces: PredictedPlayer with input snapshot buffer, server correction RPC, reconciliation loop, entity interpolation for remote players.
+
+**Diagnosing desync:**
+```
+/multiplayer debug "game desyncs: enemy health differs between clients after 30 seconds"
+```
+Checklist: Are all damage calculations server-authoritative? Are any values using randf() without synced seed? Is health sent as reliable property in MultiplayerSynchronizer?
+
+**Setting up host migration:**
+```
+/multiplayer host "handle host leaving gracefully - migrate to another peer"
+```
+Produces: Peer ranking algorithm (oldest connection = next host), migration state machine, state handoff protocol.
+
+## Tick Rate and Bandwidth Reference
+
+| Tick Rate | Bandwidth/Player | Input Granularity | Genre Fit |
+|-----------|-----------------|-------------------|----------|
+| 10 Hz | Low | 100ms | Turn-based, strategy |
+| 20 Hz | Medium | 50ms | MMO, casual co-op |
+| 60 Hz | High | 16ms | Action RPG, shooter |
+| 128 Hz | Very high | 7.8ms | Competitive FPS |
+
+**RPC reliability modes:**
+- `reliable`: TCP-like, guaranteed delivery, ordered. For: damage, deaths, inventory changes.
+- `unreliable`: UDP, may drop, not ordered. For: position updates (latest wins anyway).
+- `unreliable_ordered`: Latest delivery guaranteed, older dropped. For: animation state.

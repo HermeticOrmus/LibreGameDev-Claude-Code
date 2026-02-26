@@ -1,46 +1,45 @@
-# Procedural Generation
+# procedural-generation
 
-PCG, noise functions, wave function collapse, dungeon generation
+Procedural generation plugin for LibreGameDev. Covers noise functions (Simplex, Perlin, Voronoi, fBm), dungeon algorithms (BSP, cellular automata, drunk walk), Wave Function Collapse, seeded randomness, content population, and solvability validation.
 
-## What's Included
+## Algorithm Quick Reference
 
-### Agents
-- **Procgen Engineer** - Specialized agent for PCG, noise functions, wave function collapse, dungeon generation
+| Algorithm | Output | Godot Tool | When to Use |
+|-----------|--------|-----------|-------------|
+| Simplex fBm | Smooth terrain | FastNoiseLite | Heightmaps, biomes, organic textures |
+| BSP | Room-based dungeon | Custom | Structured dungeon layouts |
+| Cellular automata | Cave/organic shapes | Custom | Underground caves, eroded terrain |
+| Drunk walk | Winding corridors | Custom | Tunnels, rivers |
+| WFC | Tile-constrained maps | Custom | When tile adjacency rules matter |
+| Voronoi | Cell patterns | FastNoiseLite TYPE_CELLULAR | Cracked rock, territory maps |
 
-### Commands
-- `/procgen` - Quick-access command for procedural-generation workflows
+## Components
 
-### Skills
-- **Procgen Patterns** - Pattern library and knowledge base for procedural-generation
+- **procgen-engineer**: Agent with expertise in noise mathematics, dungeon algorithms, WFC, seeded randomness, authored intent vs procedural balance
+- **procgen**: Command for generating terrain, dungeons, caves, populating content, and validating solvability
+- **procgen-patterns**: Skill library with FastNoiseLite terrain, BSP dungeon generator, cellular automata cave, seeded room populator with weighted loot, BFS solvability validator
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Generate a dungeon:
 ```
-# Use the command directly
-/procgen analyze
-
-# Use the command with specific input
-/procgen generate --context "your project"
-
-# Reference patterns from the skill
-"Apply procgen-patterns patterns to this implementation"
+/procgen dungeon "BSP dungeon 80x50, 10 rooms, seeded, validate path exists"
 ```
 
-## Key Patterns
+Generate terrain heightmap:
+```
+/procgen terrain "simplex fBm heightmap with 5 octaves for 2D world"
+```
 
-- Follow established conventions for procedural-generation
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
+Add content population:
+```
+/procgen populate "enemies per room scaled to difficulty, guaranteed key item"
+```
 
-## Related Plugins
+## Seeding Rule
 
-Check the main README for related plugins in this collection.
+Every procedural system must accept an integer seed and produce identical output for the same seed. Save the seed; save the world. Use `RandomNumberGenerator` with explicit seed, never global `randf()`.
+
+## Solvability Guarantee
+
+Always run a BFS flood fill from spawn to exit before exposing a generated level to the player. If unsolvable, increment seed and regenerate. Never ship a generator that can produce unwinnable levels.

@@ -1,46 +1,40 @@
-# Performance Optimization
+# performance-optimization
 
-Frame rate, draw calls, memory, profiling, LOD
+Performance plugin for LibreGameDev. Covers GPU profiling with RenderDoc, Godot Profiler custom monitors, draw call batching with MultiMeshInstance3D, LOD configuration, object pooling, and GDScript optimization patterns.
 
-## What's Included
+## Core Rule
 
-### Agents
-- **Game Perf Engineer** - Specialized agent for Frame rate, draw calls, memory, profiling, LOD
+Profile first. Measure the actual bottleneck. Never optimize by intuition.
 
-### Commands
-- `/game-perf` - Quick-access command for performance-optimization workflows
+## Components
 
-### Skills
-- **Game Perf Patterns** - Pattern library and knowledge base for performance-optimization
+- **game-perf-engineer**: Agent who diagnoses CPU/GPU bottlenecks and applies targeted solutions with measured validation
+- **game-perf**: Command for profiling, batching, LOD, and pooling workflows
+- **game-perf-patterns**: Skill library with MultiMeshInstance3D foliage, custom monitors, generic object pool, LOD configuration, GDScript hot path optimization, and deferred processing
+
+## Quick Diagnosis Guide
+
+| Symptom | Likely Cause | First Check |
+|---------|-------------|-------------|
+| Low fps, many objects | Draw calls | Profiler > GPU > Draw Calls |
+| Low fps, enemies | Physics or AI script | Profiler > Physics contacts |
+| Frame spikes every Ns | GC / instantiate-free | Profiler > Script spikes |
+| Mobile < PC performance ratio | Texture memory | VRAM usage in Profiler |
+| fps drops when looking at area | Overdraw / transparent | RenderDoc overdraw view |
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Profile a specific bottleneck:
 ```
-# Use the command directly
-/game-perf analyze
-
-# Use the command with specific input
-/game-perf generate --context "your project"
-
-# Reference patterns from the skill
-"Apply game-perf-patterns patterns to this implementation"
+/game-perf profile "45fps with 50 active enemies"
 ```
 
-## Key Patterns
+Reduce foliage draw calls:
+```
+/game-perf batch "500 tree instances using 500 draw calls"
+```
 
-- Follow established conventions for performance-optimization
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Pool frequently spawned objects:
+```
+/game-perf pool "bullet projectiles, up to 100 simultaneous"
+```

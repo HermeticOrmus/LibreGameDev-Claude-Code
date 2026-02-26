@@ -1,87 +1,90 @@
 # /physics
 
-A quick-access command for physics-simulation workflows in Claude Code.
+Physics configuration, simulation, debugging, and optimization for Godot PhysicsServer3D.
 
 ## Trigger
 
-`/physics [action] [options]`
+`/physics [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing physics-simulation implementation
-- `generate` - Generate new physics-simulation artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for physics-simulation artifacts
+### `configure`
+Set up physics bodies, collision layers, and materials.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of physics-simulation artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against physics-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Physics Simulation - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/physics configure "collision layer table for player, enemy, projectile, trigger"
+/physics configure "character controller with floor snap and slope handling"
+/physics configure "rigidbody crate with physics material for bounce and friction"
 ```
 
-### Error
-```
-## Physics Simulation - [Action] Failed
+**Output**: CollisionLayer constants, body type selection rationale, PhysicsMaterial configuration.
 
-### Issue
-[Description of the problem]
+### `simulate`
+Implement physics-driven gameplay mechanics.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/physics simulate "destructible prop that breaks into debris on high impact"
+/physics simulate "hinged door that opens with physics impulse"
+/physics simulate "conveyor belt that pushes rigidbodies"
+/physics simulate "rope simulation with chain of rigid bodies and joints"
+```
+
+**Output**: Typed GDScript with physics body configuration, force application, joint setup.
+
+### `debug`
+Diagnose physics problems.
+
+```
+/physics debug "character falls through floor at high speed"
+/physics debug "rigidbody objects jitter when stacked"
+/physics debug "player getting stuck on stairs"
+/physics debug "collision layers not working, enemies pass through player"
+```
+
+**Output**: Root cause analysis, fix code, layer/mask table audit.
+
+### `optimize`
+Reduce physics performance overhead.
+
+```
+/physics optimize "200 physics bodies causing frame drops"
+/physics optimize "too many contact events per frame"
+/physics optimize "NavMesh + physics causing double work for AI"
+```
+
+**Output**: Body reduction strategy, sleep threshold tuning, collision mask optimization.
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/physics analyze
-
-# Generate new artifacts
-/physics generate --context ./src
-
-# Validate against best practices
-/physics validate --verbose
-
-# Generate documentation
-/physics document --format markdown
+**Designing collision layer table:**
 ```
+/physics configure "collision layers for: player, enemy, projectile, pickup, trigger, vehicle"
+```
+Produces: Layer constants table, body assignment table (who is what, who sees what), rationale for each mask choice.
+
+**Character falls through floor:**
+```
+/physics debug "CharacterBody3D occasionally falls through floor when moving fast"
+```
+Root cause: velocity too high for collision step; character moves further than floor thickness in one frame. Fixes:
+1. Enable CCD for fast-moving scenarios
+2. Increase physics tick rate (Project Settings > physics_fps to 120)
+3. Add floor sweep margin: `floor_snap_length = 0.3`
+
+**Physics objects jitter when stacked:**
+```
+/physics debug "crates jitter when stacked 3 high"
+```
+Root cause: physics solver instability. Fixes: increase `physics/3d/solver_iterations` in ProjectSettings, reduce crate mass variance, add slight friction to crate material.
+
+## Physics Body Selection Guide
+
+| Scenario | Body Type | Key Property |
+|---------|----------|-------------|
+| Terrain, walls, ground | StaticBody3D | Never moves |
+| Player character | CharacterBody3D | move_and_slide() |
+| NPC character | CharacterBody3D | NavigationAgent3D |
+| Physics prop | RigidBody3D | mass, linear_damp |
+| Moving platform | AnimatableBody3D | Kinematic, affects rigid |
+| Zone trigger | Area3D | body_entered signal |
+| Pickup item | Area3D or StaticBody3D | Depends on pickup type |

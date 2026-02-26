@@ -1,46 +1,44 @@
-# Ui Game Design
+# ui-game-design
 
-Game UI/HUD, menus, inventory, dialogue systems
+Game UI plugin for LibreGameDev. Covers diegetic vs non-diegetic UI taxonomy, Godot Control anchoring and theme system, HUD composition with CanvasLayer, menu state stacks, inventory drag-and-drop, dialogue systems (Dialogue Manager, Ink), accessibility standards (colorblind, controller navigation, text scaling), and UI performance.
 
-## What's Included
+## UI Taxonomy
 
-### Agents
-- **Game Ui Designer** - Specialized agent for Game UI/HUD, menus, inventory, dialogue systems
+| Type | Lives In | Examples |
+|------|----------|---------|
+| Diegetic | Game world | Health bar on character, ammo on gun |
+| Non-diegetic (HUD) | Screen overlay | Corner health bar, minimap, cooldowns |
+| Meta | Outside game fiction | Pause menu, save screen, settings |
+| Spatial | 3D world space | Floating enemy health bars, world tooltips |
 
-### Commands
-- `/game-ui` - Quick-access command for ui-game-design workflows
+## Components
 
-### Skills
-- **Game Ui Patterns** - Pattern library and knowledge base for ui-game-design
+- **game-ui-designer**: Agent with expertise in Godot Control system, HUD design, menu state machines, inventory systems, dialogue display, accessibility standards, and UI performance
+- **game-ui**: Command for building HUD elements, menus with controller navigation, inventory grids, dialogue boxes, and accessibility improvements
+- **game-ui-patterns**: Skill library with HealthBar (ghost tween), MenuManager (push/pop stack), InventorySlot (drag-and-drop API), TypewriterDialogueBox, SmartTooltip (screen-edge-aware), and SettingsMenu (live preview + cancel)
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Build a health bar:
 ```
-# Use the command directly
-/game-ui analyze
-
-# Use the command with specific input
-/game-ui generate --context "your project"
-
-# Reference patterns from the skill
-"Apply game-ui-patterns patterns to this implementation"
+/game-ui hud "animated health bar with red ghost effect showing damage taken"
 ```
 
-## Key Patterns
+Create a main menu:
+```
+/game-ui menu "main menu with Play, Settings, Quit - keyboard and controller navigable"
+```
 
-- Follow established conventions for ui-game-design
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
+Add dialogue:
+```
+/game-ui dialogue "NPC dialogue with typewriter text, portrait, skip on confirm"
+```
 
-## Related Plugins
+## Accessibility Baseline
 
-Check the main README for related plugins in this collection.
+Minimum requirements for every released game:
+- All menus keyboard/controller navigable (no mouse required)
+- No critical information communicated by color alone (colorblind)
+- Subtitles for all dialogue
+- Text size adjustable in settings
+- Focus indicator visible when navigating with keyboard/controller

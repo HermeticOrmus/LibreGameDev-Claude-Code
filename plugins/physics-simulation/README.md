@@ -1,46 +1,36 @@
-# Physics Simulation
+# physics-simulation
 
-Rigidbody, collision, raycasting, joints, cloth physics
+Physics plugin for LibreGameDev. Covers Godot PhysicsServer3D, collision layers, body type selection, CharacterBody3D controller, RigidBody3D dynamics, Area3D triggers, joint constraints, and physics optimization.
 
-## What's Included
+## Body Type Quick Reference
 
-### Agents
-- **Physics Engineer** - Specialized agent for Rigidbody, collision, raycasting, joints, cloth physics
+| Type | Moves? | Physics? | Use For |
+|------|--------|---------|---------|
+| StaticBody3D | No | Receives only | Terrain, walls, platforms |
+| CharacterBody3D | Code-driven | Kinematic | Player, NPC |
+| RigidBody3D | Physics-driven | Full simulation | Props, debris, vehicles |
+| AnimatableBody3D | Code-driven | Affects RigidBody | Moving platforms |
+| Area3D | Optional | Overlap only | Triggers, sensors, zones |
 
-### Commands
-- `/physics` - Quick-access command for physics-simulation workflows
+## Components
 
-### Skills
-- **Physics Patterns** - Pattern library and knowledge base for physics-simulation
+- **physics-engineer**: Agent with expertise in Godot physics bodies, collision layers, CCD, joints, and PhysicsServer3D direct API
+- **physics**: Command for configuring, simulating, debugging, and optimizing physics
+- **physics-patterns**: Skill library with collision layer constants, CharacterBody3D controller, RigidBody3D destruction, raycasting patterns, Area3D triggers, and HingeJoint3D
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Configure collision layers:
 ```
-# Use the command directly
-/physics analyze
-
-# Use the command with specific input
-/physics generate --context "your project"
-
-# Reference patterns from the skill
-"Apply physics-patterns patterns to this implementation"
+/physics configure "collision layers for 3D action game: player, enemy, projectile, trigger"
 ```
 
-## Key Patterns
+Debug falling through floor:
+```
+/physics debug "character falls through floor at high movement speed"
+```
 
-- Follow established conventions for physics-simulation
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Implement destructible object:
+```
+/physics simulate "crate that breaks into debris when hit with enough force"
+```

@@ -1,46 +1,37 @@
-# Localization
+# localization
 
-Game text localization, translation workflows, cultural adaptation
+Localization plugin for LibreGameDev. Covers Godot TranslationServer, gettext PO format, ICU plural forms, RTL text for Arabic/Hebrew, CJK font fallback chains, and pseudo-localization testing.
 
-## What's Included
+## Components
 
-### Agents
-- **Localization Engineer** - Specialized agent for Game text localization, translation workflows, cultural adaptation
+- **localization-engineer**: Agent with expertise in Godot localization, gettext workflow, plurals, RTL, and CJK font handling
+- **localize**: Command for string extraction, PO file generation, localization testing, and shipping
+- **localization-patterns**: Skill library with tr() usage, PO file structure, font fallback, RTL layout, and pseudo-localization
 
-### Commands
-- `/localize` - Quick-access command for localization workflows
+## Localization Readiness Checklist
 
-### Skills
-- **Localization Patterns** - Pattern library and knowledge base for localization
+Before first translator handoff:
+- [ ] All displayed strings wrapped in `tr()` or `tr_n()`
+- [ ] No string concatenation with variables (use format substitution)
+- [ ] Pseudo-localization passes with no visible English in any UI
+- [ ] German locale UI tested for 40% text expansion
+- [ ] Arabic locale UI tested for RTL mirroring
+- [ ] Font fallback chain covers all target language scripts
+- [ ] POT file extracted and ready for translation memory system
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Audit for missing tr() calls:
 ```
-# Use the command directly
-/localize analyze
-
-# Use the command with specific input
-/localize generate --context "your project"
-
-# Reference patterns from the skill
-"Apply localization-patterns patterns to this implementation"
+/localize extract "find hardcoded strings not wrapped in tr()"
 ```
 
-## Key Patterns
+Add a new language:
+```
+/localize translate "add Spanish locale"
+```
 
-- Follow established conventions for localization
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Enable pseudo-localization testing:
+```
+/localize test "enable pseudo-localization"
+```

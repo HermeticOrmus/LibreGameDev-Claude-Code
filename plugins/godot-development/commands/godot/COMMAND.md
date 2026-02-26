@@ -1,87 +1,88 @@
 # /godot
 
-A quick-access command for godot-development workflows in Claude Code.
+Godot 4 development: scene setup, GDScript implementation, GDExtension, and GUT testing.
 
 ## Trigger
 
-`/godot [action] [options]`
+`/godot [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing godot-development implementation
-- `generate` - Generate new godot-development artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for godot-development artifacts
+### `scene`
+Design or generate scene structure and node hierarchy.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of godot-development artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against godot-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Godot Development - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/godot scene "third-person character with movement, health, and weapon"
+/godot scene "enemy with detection area, patrol path, and health"
+/godot scene "inventory UI with grid, item slots, and tooltip"
 ```
 
-### Error
-```
-## Godot Development - [Action] Failed
+**Output**: Node tree diagram, recommended node types, @export and @onready declarations.
 
-### Issue
-[Description of the problem]
+### `script`
+Generate typed GDScript for a specific system or component.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/godot script "CharacterBody3D movement with coyote time and jump buffering"
+/godot script "Area3D pickup with cooldown and respawn"
+/godot script "Resource-based weapon data with fire rate and damage"
+```
+
+**Output**: Full typed GDScript with class_name, @export, signals, and inline comments.
+
+### `extend`
+GDExtension or plugin implementation for performance-critical code.
+
+```
+/godot extend "custom CharacterBody with advanced coyote time in C++"
+/godot extend "editor plugin for tilemap auto-population"
+/godot extend "visual profiler overlay using @tool script"
+```
+
+**Output**: GDExtension C++ skeleton with GDCLASS macro, or @tool GDScript for editor plugins.
+
+### `test`
+Write GUT unit tests for a component or system.
+
+```
+/godot test "HealthComponent with damage, healing, death signal, and overkill"
+/godot test "StateMachine transition table with event dispatch"
+/godot test "Inventory add/remove/stack item operations"
+```
+
+**Output**: GUT test class with before_each, test_ methods, signal watching, and edge cases.
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/godot analyze
-
-# Generate new artifacts
-/godot generate --context ./src
-
-# Validate against best practices
-/godot validate --verbose
-
-# Generate documentation
-/godot document --format markdown
+**CharacterBody3D movement with all game feel features:**
 ```
+/godot script "CharacterBody3D with coyote time, jump buffering, and variable jump height"
+```
+Produces: Typed GDScript with:
+- Coyote time (2-frame grace period after leaving ledge)
+- Jump buffer (0.1s pre-input window before landing)
+- Variable jump height (release early = shorter jump, via gravity multiplier)
+- Acceleration/friction curves for responsive feel
+
+**Resource-based item system:**
+```
+/godot script "ItemData Resource with rarity, stats, icon, and stack size"
+```
+Produces: `class_name ItemData extends Resource` with @export fields, stat modifiers array, Rarity enum, and validation.
+
+**GUT test for save system:**
+```
+/godot test "SaveSystem serializes and deserializes player state correctly"
+```
+Produces: GUT test with temporary file creation, save/load roundtrip assertion, version migration test.
+
+## GDScript Quality Checklist
+
+Before shipping any GDScript:
+- [ ] Every variable has a type annotation
+- [ ] Every function has a return type (`-> void`, `-> float`, etc.)
+- [ ] `class_name` declared if reusable as a type
+- [ ] Signal names are snake_case past-tense verbs
+- [ ] No bare `get_node()` calls outside `_ready()`
+- [ ] `@onready` used for all child node references
+- [ ] Hot paths (`_physics_process`) have no dynamic typing or string lookups

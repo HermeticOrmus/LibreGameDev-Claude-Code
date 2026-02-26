@@ -1,46 +1,49 @@
-# Ai Game Behavior
+# ai-game-behavior
 
-NPC AI, behavior trees, finite state machines, utility AI
+Game AI plugin for LibreGameDev. Covers NPC intelligence architecture: behavior trees, finite state machines, utility AI, GOAP, navigation, and perception systems.
 
-## What's Included
+## Scope
 
-### Agents
-- **Game Ai Engineer** - Specialized agent for NPC AI, behavior trees, finite state machines, utility AI
+This plugin handles the decision-making layer of NPC agents - the logic between "what the NPC perceives" and "what the NPC does." It does not cover animation, physics, or networking.
 
-### Commands
-- `/game-ai` - Quick-access command for ai-game-behavior workflows
+## Architecture Decision Guide
 
-### Skills
-- **Game Ai Patterns** - Pattern library and knowledge base for ai-game-behavior
+| NPC Complexity | States/Behaviors | Recommended Architecture |
+|---------------|-----------------|--------------------------|
+| Simple pickup, trigger | 1-3 | Script-only, no AI framework |
+| Guard, turret, basic enemy | 3-8 | Finite State Machine |
+| Combat AI, companion | 8-20 | Behavior Tree |
+| Believable civilian | Any | Utility AI |
+| Problem-solving agent | Dynamic | GOAP |
+| Boss with phases | 3-6 phases, complex sub-behavior | HFSM + BT hybrid |
+
+## Components
+
+- **game-ai-engineer**: Agent with expertise in all major game AI architectures
+- **game-ai**: Command for designing, implementing, debugging, and tuning AI systems
+- **game-ai-patterns**: Skill library with GDScript patterns for BT nodes, FSM tables, utility curves, GOAP actions, NavMesh configuration, and vision sensing
+
+## Key Literature
+
+- "Behavior Trees in Robotics and AI" - Michele Colledanchise & Petter Ogren
+- "GameAIPro" series (volumes 1-4) - edited by Steve Rabin - freely available online
+- "Goal-Oriented Action Planning" - Jeff Orkin (F.E.A.R. postmortem)
+- "Infinite Axis Utility System" - Dave Mark (GDC 2012)
+- "AI Game Programming Wisdom" series - Steve Rabin
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Design an AI system:
 ```
-# Use the command directly
-/game-ai analyze
-
-# Use the command with specific input
-/game-ai generate --context "your project"
-
-# Reference patterns from the skill
-"Apply game-ai-patterns patterns to this implementation"
+/game-ai design "combat enemy: patrol, investigate noise, attack on sight, flee when low health"
 ```
 
-## Key Patterns
+Implement from design:
+```
+/game-ai implement bt "patrol-investigate-attack with low health flee"
+```
 
-- Follow established conventions for ai-game-behavior
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Debug behavior problems:
+```
+/game-ai debug "NPC ignores player after initial attack"
+```

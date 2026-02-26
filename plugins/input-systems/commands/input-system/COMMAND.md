@@ -1,87 +1,97 @@
 # /input-system
 
-A quick-access command for input-systems workflows in Claude Code.
+Input mapping, deadzone configuration, rebinding, input buffering, and multi-platform input support.
 
 ## Trigger
 
-`/input-system [action] [options]`
+`/input-system [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing input-systems implementation
-- `generate` - Generate new input-systems artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for input-systems artifacts
+### `configure`
+Set up InputMap actions with keyboard and gamepad bindings.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of input-systems artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against input-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Input Systems - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/input-system configure "third-person action game: move, jump, attack, dodge, interact, camera"
+/input-system configure "RTS: select, multi-select, move, attack-move, camera pan/zoom"
+/input-system configure "menu navigation with keyboard and gamepad d-pad"
 ```
 
-### Error
-```
-## Input Systems - [Action] Failed
+**Output**: InputMap action list, default keyboard and gamepad bindings, GDScript configuration code.
 
-### Issue
-[Description of the problem]
+### `rebind`
+Implement input rebinding UI and serialization.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/input-system rebind "in-game keybinding menu with conflict detection"
+/input-system rebind "save and load custom bindings to user:// directory"
+/input-system rebind "reset to defaults button"
+```
+
+**Output**: InputRebinder GDScript, serialization format, conflict detection logic.
+
+### `test`
+Input buffering and game feel improvements.
+
+```
+/input-system test "jump feels unresponsive on controller"
+/input-system test "attack combo drops inputs at high animation speed"
+/input-system test "movement feels floaty on gamepad analog stick"
+```
+
+**Output**: Root cause analysis, buffer/coyote implementation, deadzone correction.
+
+### `polish`
+Platform-specific input polish: rumble, prompts, mobile touch.
+
+```
+/input-system polish "show correct button prompts for connected device (keyboard vs controller)"
+/input-system polish "haptic rumble for player damage and attacks"
+/input-system polish "mobile virtual joystick for movement"
+```
+
+**Output**: Device detection code, prompt switching system, rumble pattern library, or VirtualJoystick Control.
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/input-system analyze
-
-# Generate new artifacts
-/input-system generate --context ./src
-
-# Validate against best practices
-/input-system validate --verbose
-
-# Generate documentation
-/input-system document --format markdown
+**Implementing jump buffer + coyote time:**
 ```
+/input-system test "platformer jump feels inconsistent on gamepad"
+```
+Produces: PlatformerInput node with 8-frame jump buffer and 6-frame coyote time, consume_jump() interface for CharacterBody3D.
+
+**Dynamic controller prompt switching:**
+```
+/input-system polish "show Xbox prompts for gamepad, keyboard prompts for KBM"
+```
+Produces: Device detection using `Input.joy_connection_changed` signal, prompt texture atlas lookup, UI label that updates on device switch.
+
+**Complete rebinding system:**
+```
+/input-system rebind "full rebinding menu with save/load"
+```
+Produces: InputRebinder class + UI template (VBoxContainer with action list, Listen button, conflict label).
+
+## Deadzone Reference
+
+| Deadzone Type | Formula | When to Use |
+|--------------|---------|-------------|
+| None | raw value | Mouse, keyboard |
+| Axial | threshold per-axis | Simple but diagonal-biased |
+| Radial | threshold on magnitude | Symmetric, better feel |
+| Scaled Radial | remap [inner,outer] to [0,1] | Best: no deadspot at edge |
+
+**Standard values**: inner=0.15, outer=0.95 for most controllers.
+
+## Platform Action Naming Convention
+
+Use semantic names, not device names:
+```
+# Wrong
+"press_x_button" / "press_space"
+
+# Correct
+"jump", "attack_primary", "dodge", "interact", "open_map"
+```
+
+Semantic names survive rebinding, device switching, and platform porting.

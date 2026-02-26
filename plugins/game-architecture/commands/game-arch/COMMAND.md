@@ -1,87 +1,81 @@
 # /game-arch
 
-A quick-access command for game-architecture workflows in Claude Code.
+Game architecture design, refactoring, testing, and profiling. Covers ECS, game loops, event systems, ScriptableObject/Resource patterns, and scene management.
 
 ## Trigger
 
-`/game-arch [action] [options]`
+`/game-arch [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing game-architecture implementation
-- `generate` - Generate new game-architecture artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for game-architecture artifacts
+### `design`
+Design a game system architecture from requirements.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of game-architecture artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against game-arch-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Game Architecture - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/game-arch design "health system for RPG with status effects, shields, and damage types"
+/game-arch design "inventory system supporting items, stacking, equipment slots"
+/game-arch design "quest system with objectives, rewards, and branching"
 ```
 
-### Error
-```
-## Game Architecture - [Action] Failed
+**Output**: Component breakdown, data flow diagram, signal/event schema, GDScript skeleton.
 
-### Issue
-[Description of the problem]
+### `refactor`
+Analyze existing code and propose structural improvements.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/game-arch refactor "300-line Player.gd handles movement, combat, and inventory"
+/game-arch refactor "12 Autoloads causing circular dependencies"
+/game-arch refactor "everything communicates via get_node() path strings"
+```
+
+**Output**: Decomposition plan, component extraction steps, dependency graph before/after.
+
+### `test`
+Design a testable architecture and write unit tests with GUT.
+
+```
+/game-arch test "HealthComponent with damage, healing, and death signal"
+/game-arch test "StateMachine with transition table"
+/game-arch test "WeaponData Resource with fire rate and damage calculations"
+```
+
+**Output**: GUT test class with test_ methods, mock/stub patterns for Node dependencies.
+
+### `profile`
+Identify architecture patterns causing performance problems.
+
+```
+/game-arch profile "_process() with 500 iterations per frame"
+/game-arch profile "signals connected to 1000 receivers"
+/game-arch profile "PackedScene.instantiate() called every frame for projectiles"
+```
+
+**Output**: Root cause analysis, refactored pattern (object pool, batch processing, deferred signals).
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/game-arch analyze
-
-# Generate new artifacts
-/game-arch generate --context ./src
-
-# Validate against best practices
-/game-arch validate --verbose
-
-# Generate documentation
-/game-arch document --format markdown
+**Decomposing a God script:**
 ```
+/game-arch refactor "player script handles input, movement, combat, health, animation, and UI"
+```
+Produces: Component decomposition into InputComponent, MovementComponent, CombatComponent, HealthComponent; signal wiring between components; scene structure diagram.
+
+**Designing an event bus:**
+```
+/game-arch design "decoupled event system for cross-scene communication"
+```
+Produces: EventBus autoload with typed signals, Resource-as-event-channel alternative, usage examples for emitters and receivers.
+
+**Writing testable architecture:**
+```
+/game-arch test "damage calculation system"
+```
+Produces: GUT test class, dependency injection via @export to avoid get_parent() in tests, expected signal verification with `watch_signals()`.
+
+## Architecture Decision Record
+
+When recommending a pattern, include:
+1. **Problem**: What specific issue does this solve?
+2. **Pattern**: Name the pattern (EventBus, Composition, Service Locator)
+3. **Tradeoffs**: What does this make harder?
+4. **Alternatives**: What else was considered and why rejected?

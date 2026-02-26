@@ -1,46 +1,41 @@
-# Animation Systems
+# animation-systems
 
-Sprite animation, skeletal animation, blend trees, state machines
+Animation plugin for LibreGameDev. Covers skeletal animation, blend trees, state machines, inverse kinematics, root motion, and animation events across Godot, Unity, and Unreal.
 
-## What's Included
+## Scope
 
-### Agents
-- **Animation Engineer** - Specialized agent for Sprite animation, skeletal animation, blend trees, state machines
+Runtime animation logic: how animations are blended, transitioned, and driven by gameplay code. Does not cover DCC tooling (Blender rigging, Maya skinning) or asset compression pipelines (covered by asset-pipelines plugin).
 
-### Commands
-- `/animate` - Quick-access command for animation-systems workflows
+## Engine Coverage
 
-### Skills
-- **Animation Patterns** - Pattern library and knowledge base for animation-systems
+| Feature | Godot 4 | Unity | Unreal 5 |
+|---------|---------|-------|----------|
+| State machine | AnimationNodeStateMachine | Animator Controller | AnimGraph State Machine |
+| 1D blend | BlendSpace1D | Blend Tree 1D | Blend Space 1D |
+| 2D blend | BlendSpace2D | Blend Tree 2D | Blend Space |
+| Additive layer | AnimationNodeAdd2 | Animator Layer (Additive) | Additive Animation Layer |
+| IK | SkeletonIK3D, FABRIK | Animation Rigging | Control Rig, IK Retargeter |
+| Root motion | get_root_motion_position() | Apply Root Motion (Animator) | Root Motion |
+
+## Components
+
+- **animation-engineer**: Agent with expertise in skeletal animation, blend trees, IK, and root motion
+- **animate**: Command for setting up, blending, adding IK, and wiring animation events
+- **animation-patterns**: Skill library with GDScript/C# for blend space locomotion, root motion, foot planting IK, and animation events
 
 ## Quick Start
 
-1. Copy this plugin to your Claude Code plugins directory
-2. Use the agent for guided, multi-step workflows
-3. Use the command for quick, targeted operations
-4. Reference the skill for patterns and best practices
-
-## Usage Examples
-
+Set up locomotion blend tree:
 ```
-# Use the command directly
-/animate analyze
-
-# Use the command with specific input
-/animate generate --context "your project"
-
-# Reference patterns from the skill
-"Apply animation-patterns patterns to this implementation"
+/animate setup "Godot 3D character with 8-directional locomotion blend space"
 ```
 
-## Key Patterns
+Fix foot sliding:
+```
+/animate blend "locomotion blend space foot sliding at high speed"
+```
 
-- Follow established conventions for animation-systems
-- Validate inputs before processing
-- Document decisions and rationale
-- Test outputs against requirements
-- Iterate based on feedback
-
-## Related Plugins
-
-Check the main README for related plugins in this collection.
+Add foot IK on terrain:
+```
+/animate ik "foot planting on uneven terrain"
+```

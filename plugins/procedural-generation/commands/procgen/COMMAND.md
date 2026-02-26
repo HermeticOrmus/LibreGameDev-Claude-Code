@@ -1,87 +1,91 @@
 # /procgen
 
-A quick-access command for procedural-generation workflows in Claude Code.
+Procedural content generation: terrain, dungeons, caves, tile maps, and content placement.
 
 ## Trigger
 
-`/procgen [action] [options]`
+`/procgen [action] [target]`
 
-## Input
+## Actions
 
-### Actions
-- `analyze` - Analyze existing procedural-generation implementation
-- `generate` - Generate new procedural-generation artifacts
-- `improve` - Suggest improvements to current implementation
-- `validate` - Check implementation against best practices
-- `document` - Generate documentation for procedural-generation artifacts
+### `terrain`
+Generate noise-based terrain or heightmaps.
 
-### Options
-- `--context <path>` - Specify the file or directory to operate on
-- `--format <type>` - Output format (markdown, json, yaml)
-- `--verbose` - Include detailed explanations
-- `--dry-run` - Preview changes without applying them
-
-## Process
-
-### Step 1: Context Gathering
-- Read relevant files and configuration
-- Identify the current state of procedural-generation artifacts
-- Determine applicable standards and conventions
-
-### Step 2: Analysis
-- Evaluate against procgen-patterns patterns
-- Identify gaps, issues, and opportunities
-- Prioritize findings by impact and effort
-
-### Step 3: Execution
-- Apply the requested action
-- Generate or modify artifacts as needed
-- Validate changes against requirements
-
-### Step 4: Output
-- Present results in the requested format
-- Include actionable next steps
-- Flag any items requiring human decision
-
-## Output
-
-### Success
 ```
-## Procedural Generation - [Action] Complete
-
-### Changes Made
-- [List of changes]
-
-### Validation
-- [Checks passed]
-
-### Next Steps
-- [Recommended follow-up actions]
+/procgen terrain "2D sidescroller background with rolling hills"
+/procgen terrain "top-down world map with biomes: forest, desert, water"
+/procgen terrain "3D heightmap with mountain peaks and valleys, 256x256"
 ```
 
-### Error
-```
-## Procedural Generation - [Action] Failed
+**Output**: FastNoiseLite configuration, heightmap sampling function, biome thresholds.
 
-### Issue
-[Description of the problem]
+### `dungeon`
+Generate room-based dungeon or cave layouts.
 
-### Suggested Fix
-[How to resolve the issue]
 ```
+/procgen dungeon "BSP dungeon 80x50 grid, 8-15 rooms, connect all rooms"
+/procgen dungeon "cellular automata cave system, 60x40, 5 smoothing passes"
+/procgen dungeon "drunk walk corridors for underground tunnels"
+```
+
+**Output**: Typed GDScript generator class with seed parameter, room list, corridor list, TileMap fill method.
+
+### `populate`
+Place enemies, items, and events in generated spaces.
+
+```
+/procgen populate "enemies in dungeon rooms scaled by difficulty 0-1"
+/procgen populate "loot tables for 3 room types: treasure, combat, rest"
+/procgen populate "guaranteed key item in first room, exit in last room"
+```
+
+**Output**: RoomPopulator with derived seeds, weighted random placement, quota enforcement.
+
+### `validate`
+Add solvability and quality checks to a generator.
+
+```
+/procgen validate "check dungeon has path from spawn to exit"
+/procgen validate "verify enemy count within 3-8 range per level"
+/procgen validate "stress test: generate 100 levels and report failures"
+```
+
+**Output**: BFS flood fill validator, stat assertions, batch generation test loop.
 
 ## Examples
 
-```bash
-# Analyze current implementation
-/procgen analyze
+**Generating a seeded dungeon with validation:**
+```
+/procgen dungeon "BSP dungeon for roguelike, 100x60, must have guaranteed spawn-to-exit path"
+```
+Produces: `BSPDungeon.generate(bounds, seed)` with rooms + corridors, plus `DungeonValidator.is_solvable()` check; if unsolvable, increments seed and retries.
 
-# Generate new artifacts
-/procgen generate --context ./src
+**Terrain with biomes:**
+```
+/procgen terrain "top-down world with ocean (< 0.3), beach (0.3-0.4), grass (0.4-0.7), mountain (> 0.7)"
+```
+Produces: `FastNoiseLite` config, `get_biome(x, y) -> StringName` function using noise thresholds, TileMap tile assignment.
 
-# Validate against best practices
-/procgen validate --verbose
+## Algorithm Selection Guide
 
-# Generate documentation
-/procgen document --format markdown
+| Goal | Algorithm | Notes |
+|------|-----------|-------|
+| Structured dungeon rooms | BSP | Controllable room count, clean corridors |
+| Organic caves | Cellular automata | Tune birth/death limits for cave density |
+| Winding tunnels | Drunk walk | Adjust step count for corridor length |
+| Tile-constrained variety | Wave Function Collapse | Requires adjacency rule definition |
+| Terrain heightmap | Simplex fBm | Tune octaves + lacunarity for detail level |
+| Scattered objects | White noise | Objects, trees, debris - not terrain |
+| Cracked rock / alien ground | Voronoi noise | Cell-based patterns |
+
+## Seeding Protocol
+
+All generators must accept an `int seed` parameter:
+```gdscript
+# Correct: explicit RNG
+var rng := RandomNumberGenerator.new()
+rng.seed = level_seed
+
+# Wrong: global rng breaks reproducibility
+var x = randi()  # Different every run
 ```
