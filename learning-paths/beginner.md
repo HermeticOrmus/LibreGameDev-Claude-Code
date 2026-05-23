@@ -1,167 +1,84 @@
-# Beginner Learning Path - Game Development Fundamentals
+# Beginner — your first game with Claude Code
 
-## Overview
+You've never shipped a game. You want to understand the discipline before picking an engine, and you want Claude Code as your thinking partner. This path is a curated reading order through the reference docs, paired with hands-on prompts you'll run against the plugins.
 
-This path introduces game development from the ground up. You will understand the game loop, work with Godot Engine to build your first interactive project, and learn the fundamentals of sprites, input handling, and scene management. By the end, you will have a playable game and the mental model to build more complex ones.
+## What you'll learn
 
-## Prerequisites
+- How game loops, state, and input differ from web/SaaS development
+- Why object pooling matters for game performance
+- The mental model for game architecture (entities, components, systems vs. scene tree composition)
+- How to use the LibreGameDev agents productively
+- Enough Godot 4 to ship a first prototype
 
-- Basic programming knowledge (variables, functions, loops, conditionals)
-- A computer that can run Godot 4.x (modest hardware requirements)
-- Willingness to iterate: games are built through cycles of play, observe, adjust
+## Path
 
-## Modules
+### Phase 1 — Foundation (1-2 hours)
 
-### Module 1: The Game Loop and Core Concepts
+**Read:**
+- [`docs/01-getting-started/`](../docs/01-getting-started/) — full section, in order
+- [`docs/02-core-game-concepts/`](../docs/02-core-game-concepts/) — at minimum the game-loop and state-management chapters
 
-#### Concepts
+**Then ask the `/game-arch` agent:**
 
-- The game loop: the heartbeat of every game (input, update, render, repeat)
-- Frame rate and delta time: why `_process(delta)` uses delta and what happens when you ignore it
-- Game objects and scene trees: everything is a node, nodes compose into scenes, scenes compose into games
-- Coordinate systems: screen space, world space, and why Y is often inverted in 2D
-- Godot's node system: Node2D, Sprite2D, CharacterBody2D, Area2D, and when to use each
-- Scenes as prefabs: reusable compositions of nodes (an enemy is a scene, a bullet is a scene)
-- The difference between `_process()` and `_physics_process()`: frame-dependent vs physics-dependent
-- Signals: Godot's observer pattern for decoupled communication between nodes
-- GDScript basics: Python-like syntax, typed variables, `@onready`, `@export`
+```
+/game-arch I'm new to game dev. I want to understand the core architectural patterns before picking an engine. Walk me through: game loop structure, state management, entity vs component vs system. Use 2D platformer as the running example.
+```
 
-#### Hands-On Exercise
+The agent should walk you through fixed timestep, the update-render split, entity-component pattern, and signal-driven architecture. If it doesn't, the plugin install didn't work.
 
-Set up Godot and explore the engine:
+### Phase 2 — First prototype (3-5 hours)
 
-1. Download and install Godot 4.x (standard version, not .NET unless you need C#)
-2. Create a new project. Explore the editor: Scene dock, Inspector, FileSystem, Output
-3. Create a scene with a Sprite2D node. Assign a texture (any PNG image)
-4. Attach a script to the sprite. Make it move right in `_process(delta)`:
-   ```gdscript
-   position.x += 100 * delta
-   ```
-5. Run the project and observe the sprite moving
-6. Modify the script to wrap the sprite around when it exits the screen
-7. Add a second sprite that moves vertically. Observe both running in the same game loop
+**Pick an engine.** For beginners, Godot 4 is the gentlest entry. Unity is more job-relevant. Unreal is the most demanding. Don't optimize for resume — optimize for getting through your first prototype without bouncing.
 
-Answer these questions: What happens if you remove `* delta`? Why does the sprite speed change?
+**Walk the [QUICK_START.md](../QUICK_START.md)** in this repo. Build the 2D space shooter prototype. Don't skip steps.
 
-#### Key Takeaways
+**Read:**
+- [`docs/03-graphics-rendering/canvas-2d-rendering.md`](../docs/03-graphics-rendering/canvas-2d-rendering.md) — even if you use an engine, the concepts transfer
+- [`docs/03-graphics-rendering/particle-systems.md`](../docs/03-graphics-rendering/particle-systems.md) — pooling pattern shows up everywhere
 
-- Delta time makes movement frame-rate independent: the game behaves the same at 30fps and 144fps
-- Everything in Godot is a node; composition (nesting nodes) is how you build complexity
-- The game loop runs every frame; your job is to describe what changes between frames
+### Phase 3 — Polish (2-3 hours)
 
-### Module 2: Sprites, Animation, and Input
+Your prototype works. Now make it feel better.
 
-#### Concepts
+**Read:**
+- [`docs/02-core-game-concepts/`](../docs/02-core-game-concepts/) — game feel chapter
+- [`docs/07-ui-ux/`](../docs/07-ui-ux/) — at minimum the controller-friendly UI patterns
 
-- Sprite sheets and AnimatedSprite2D: multiple frames in one image for smooth animation
-- Animation states: idle, walk, jump, attack and transitioning between them
-- Input mapping: binding physical keys to abstract actions (`ui_left`, `jump`, `attack`)
-- Input handling patterns: polling (`Input.is_action_pressed`) vs events (`_input(event)`)
-- The input map: Project Settings > Input Map for configurable, remappable controls
-- Sprite flipping: `flip_h` for direction changes without duplicate art
-- Z-index and draw order: controlling what renders in front of what
-- Camera2D: following the player, setting limits, smooth scrolling
-- Tilemaps: painting levels with reusable tiles instead of placing individual sprites
+**Then ask the `/animation` agent:**
 
-#### Hands-On Exercise
+```
+/animation My 2D shooter feels stiff. The player shoots but there's no feedback — bullets just appear and enemies just disappear. Add: bullet muzzle flash, hit particles, screen shake on impact, damage numbers floating up from hit enemies.
+```
 
-Build a character controller with animation:
+These are "juice" techniques. They take 30 minutes of code to implement and they're the difference between "tech demo" and "game."
 
-1. Find or create a character sprite sheet (16x16 or 32x32 recommended, many free on itch.io)
-2. Create a `CharacterBody2D` scene with:
-   - `AnimatedSprite2D` with idle and walk animations
-   - `CollisionShape2D` for physics interactions
-3. Set up input actions in Project Settings: `move_left`, `move_right`, `move_up`, `move_down`
-4. Write a movement script:
-   ```gdscript
-   extends CharacterBody2D
+### Phase 4 — Beyond prototype (4+ hours)
 
-   @export var speed: float = 200.0
+Now you can decide if game dev is for you. Try one of:
 
-   func _physics_process(delta):
-       var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-       velocity = direction * speed
-       move_and_slide()
+**Option A — Genre exploration**: Build a different prototype in the same engine. Pick a different genre to stretch.
 
-       if direction.x != 0:
-           $AnimatedSprite2D.flip_h = direction.x < 0
+**Option B — Engine comparison**: Build the same prototype in a different engine. Compare the developer experience.
 
-       if direction.length() > 0:
-           $AnimatedSprite2D.play("walk")
-       else:
-           $AnimatedSprite2D.play("idle")
-   ```
-5. Create a tilemap level with walls the player cannot walk through
-6. Add a Camera2D that follows the player with smooth scrolling
+**Option C — Read deeper**: [`docs/09-advanced-patterns/`](../docs/09-advanced-patterns/) covers ECS, data-oriented design, command patterns. These patterns matter for shipping games at scale.
 
-Play the result. Adjust speed, animation frame rate, and camera smoothing until movement feels good. "Feels good" is subjective and requires iteration.
+## What you've learned
 
-#### Key Takeaways
+By the end of this path:
 
-- Input mapping decouples physical buttons from game actions: always use actions, not raw key codes
-- `move_and_slide()` handles collision response so you do not have to
-- Game feel is in the details: acceleration, deceleration, animation timing all matter
-- Use `_physics_process` for movement so physics behavior is consistent
+- You've shipped a working game prototype with Claude Code's help
+- You understand the architectural patterns that matter for games (pooling, fixed timestep, signal-driven, game feel)
+- You can talk to a specific game engine (probably Godot) at intermediate level
+- You can use LibreGameDev plugins productively
+- You know whether you want to keep going
 
-### Module 3: Your First Complete Game
+## Common gotchas
 
-#### Concepts
+1. **Picking too ambitious a first project** — your first game should be small. A 2D shooter or platformer is hard enough.
+2. **Skipping game feel** — without juice, the game feels broken even if the code is correct.
+3. **Optimizing too early** — get the game working before profiling.
+4. **Not testing on the target platform** — if you're building for mobile, run on mobile from Day 1.
 
-- Game design scope: start absurdly small (one mechanic, one level, one enemy)
-- The minimum viable game: a player, an obstacle, a goal, a fail state
-- Scene management: switching between scenes (menu, game, game over)
-- Signals for game events: `player_died`, `score_changed`, `level_completed`
-- UI basics: Label for score, Control nodes for menus, CanvasLayer for HUD
-- Collision detection: `Area2D` for triggers (pickups, damage zones), `CharacterBody2D` for physical collision
-- Sound effects: `AudioStreamPlayer2D` for positional audio, `AudioStreamPlayer` for music
-- Export: building your game for desktop (and later web, mobile)
+## Next: [Intermediate path](intermediate.md)
 
-#### Hands-On Exercise
-
-Build a complete mini-game (pick one or invent your own):
-
-**Option A: Top-down Collector**
-- Player moves with WASD to collect items that spawn randomly
-- Timer counts down from 30 seconds
-- Score display shows collected items
-- Game over screen with final score and restart button
-
-**Option B: Side-scrolling Dodge**
-- Player moves left/right and jumps to avoid obstacles scrolling from the right
-- Obstacle speed increases over time
-- Lives system (3 hits = game over)
-- High score tracking
-
-For whichever you choose:
-
-1. Create separate scenes: `Main`, `Player`, `Obstacle`/`Collectible`, `HUD`, `GameOver`
-2. Use signals to communicate between scenes (player emits `hit`, HUD listens)
-3. Add at least two sound effects (pickup/collision) and background music
-4. Create a main menu with a "Start" button
-5. Export the game as a desktop build
-
-Playtest with someone who did not build it. Watch them play without helping. Note every point of confusion.
-
-#### Key Takeaways
-
-- A finished small game teaches more than an unfinished ambitious one
-- Playtesting reveals assumptions you did not know you were making
-- Signals keep scenes independent: the player does not need to know the HUD exists
-- Scope is the hardest skill in game development; practice finishing things
-
-## Assessment
-
-You have completed the beginner path when you can:
-
-1. Explain the game loop and why delta time matters
-2. Create a player character with movement, animation, and collision
-3. Build a tilemap level with the player navigating through it
-4. Use signals to connect game events without tight coupling
-5. Ship a complete mini-game with menu, gameplay, and game-over states
-
-## Next Steps
-
-- Move to the **Intermediate Path**: state machines, physics, particles, audio, and UI systems
-- Join the Godot community: Reddit, Discord, or the official forums
-- Study games you admire: what makes the movement feel good? How does the UI communicate?
-- Participate in a game jam (Ludum Dare, GMTK) to practice finishing under constraints
+When the first prototype runs, polish it, then read the intermediate path. It covers what to do when your second project's tech debt starts to bite.

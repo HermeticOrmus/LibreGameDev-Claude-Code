@@ -1,174 +1,110 @@
-# Intermediate Learning Path - State Machines, Physics, Particles & UI
+# Intermediate — polish, juice, performance, save systems
 
-## Overview
+You've made a prototype. It works. But the second one's tech debt is biting and you need a more disciplined approach. This path covers the polish layer between "prototype" and "demo-worthy."
 
-This path deepens your game development skills with the patterns and systems that professional games rely on. You will implement state machines for complex character behavior, work with physics systems for realistic interactions, create particle effects for visual polish, integrate audio systems, and build flexible UI. These are the systems that transform a prototype into a polished game.
+## What you'll learn
 
-## Prerequisites
+- Why prototypes calcify into permanent tech debt
+- How to add game feel ("juice") that makes games feel alive
+- Performance optimization that actually moves the needle
+- Save systems with versioning + migration
+- When to refactor and when to ship as-is
 
-- Completed the Beginner Learning Path or equivalent experience
-- A finished mini-game in Godot (any scale)
-- Comfort with GDScript, scenes, signals, and the Godot editor
-- Basic understanding of vectors and trigonometry (direction, magnitude, angles)
+## Path
 
-## Modules
+### Phase 1 — Game feel (4-6 hours)
 
-### Module 1: State Machines and Complex Behavior
+**Read:**
+- [`docs/02-core-game-concepts/`](../docs/02-core-game-concepts/) — full section, focus on game-feel chapter
+- [`docs/05-audio-systems/`](../docs/05-audio-systems/) — adaptive music + sound effects
 
-#### Concepts
+**Then iterate on your prototype:**
 
-- Why state machines: when if-else chains for player states become unmanageable
-- Finite State Machine (FSM): a fixed set of states with defined transitions
-- State pattern: each state is an object/script with `enter()`, `exit()`, `update()`, `physics_update()`
-- The state machine node: manages current state, handles transitions, delegates input
-- Animation trees: Godot's built-in state machine for blending and transitioning animations
-- Hierarchical state machines: states within states (e.g., `OnGround > Idle/Running/Crouching`)
-- AI state machines: enemy behavior as states (patrol, chase, attack, flee)
-- Pushdown automata: a stack of states for handling interrupts (pause menu, cutscenes)
-- Debugging state machines: visualizing current state and transition history
+```
+/animation Walk me through adding juice to my 2D platformer. I want: squash-and-stretch on landing, screen shake on heavy hits, particle dust on running, slow-motion on critical hits, freeze-frame on impact, controller rumble.
+```
 
-#### Hands-On Exercise
+The agent should give you a prioritized list. Start with screen shake + impact freeze (highest impact-to-effort ratio).
 
-Implement a state machine for a platformer character:
+```
+/audio Design the audio palette for my 2D platformer. Music should adapt to combat (start subdued, intensify during combat, resolve after). Sound effects should layer (footsteps + jumps + landings + ambient). Don't recommend specific assets — give me the design.
+```
 
-1. Create a base `State` class:
-   ```gdscript
-   class_name State extends Node
+### Phase 2 — Performance optimization (3-5 hours)
 
-   var character: CharacterBody2D
+**Read:**
+- [`docs/10-performance-optimization/`](../docs/10-performance-optimization/) — full section in order
 
-   func enter() -> void: pass
-   func exit() -> void: pass
-   func process_input(event: InputEvent) -> State: return null
-   func process_frame(delta: float) -> State: return null
-   func process_physics(delta: float) -> State: return null
-   ```
-2. Create a `StateMachine` node that manages state transitions
-3. Implement at least six states: `Idle`, `Run`, `Jump`, `Fall`, `WallSlide`, `Dash`
-4. Each state handles its own input, physics, and animation
-5. Define clear transition rules (e.g., `Idle` -> `Run` when input detected, `Jump` -> `Fall` when velocity.y > 0)
-6. Add an enemy with three AI states: `Patrol`, `Chase`, `Attack`
-   - `Patrol`: walk between two points
-   - `Chase`: move toward player when detected (use `RayCast2D` or `Area2D`)
-   - `Attack`: deal damage when close enough, then return to `Chase`
-7. Add debug visualization: display current state name above each entity
+**Profile your prototype:**
 
-Test edge cases: what happens when you jump and dash simultaneously? When the enemy loses sight of the player mid-chase?
+```
+/perf-game I built a prototype in Godot 4 (or Unity 6). It runs at 60 FPS on my machine but drops to 30 FPS on my older laptop. Where do I start optimizing?
+```
 
-#### Key Takeaways
+The agent should insist on profiling before optimizing. Run the engine's profiler. Identify the actual bottleneck. Then optimize the bottleneck specifically.
 
-- State machines make complex behavior manageable by isolating concerns
-- Each state owns its behavior: adding a new state does not break existing ones
-- Transition logic is where bugs hide; document and test transitions explicitly
-- Animation state machines and code state machines should align but remain separate
+Common bottleneck categories:
+- Draw calls (batching helps)
+- _process / Update method overhead (consolidation helps)
+- Physics queries (spatial partitioning helps)
+- GC allocations (pooling helps)
+- Shader complexity (simplification helps)
 
-### Module 2: Physics, Particles, and Audio
+### Phase 3 — Save systems (2-3 hours)
 
-#### Concepts
+You'll need save / load for any non-arcade game.
 
-- Godot's physics engine: `CharacterBody2D` (kinematic), `RigidBody2D` (dynamic), `StaticBody2D` (immovable)
-- Collision layers and masks: controlling what collides with what without expensive checks
-- Raycasting: detecting what is in a direction without collision (line of sight, ground detection)
-- Physics materials: bounce, friction for surface interactions
-- Particle systems: `GPUParticles2D` for effects (explosions, trails, dust, rain, fire)
-- Particle properties: emission shape, velocity, gravity, color gradient, scale over lifetime
-- One-shot particles for events vs continuous particles for ambiance
-- Audio architecture: buses (Master, SFX, Music, UI), volume control per bus
-- Positional audio: `AudioStreamPlayer2D` for sounds with spatial presence
-- Audio pooling: managing multiple simultaneous sounds without clipping
-- Screen shake and hit pause: the invisible polish that makes impacts feel powerful
+**Read:**
+- [`docs/02-core-game-concepts/`](../docs/02-core-game-concepts/) — state management + persistence chapters
 
-#### Hands-On Exercise
+**Implement:**
 
-Add physics, particles, and audio to your platformer:
+```
+/save Design a save system for my 2D platformer. Requirements: player progress (level, items, stats), settings (audio, controls, graphics), profile-based (multiple profiles), versioned (so v1 saves still load after I update the game).
+```
 
-1. **Physics interactions**:
-   - Add moving platforms using `AnimatableBody2D` with `AnimationPlayer`
-   - Create breakable crates using `RigidBody2D` that shatter on impact
-   - Implement one-way platforms the player can jump through from below
-   - Add slope handling so the character walks smoothly on angled surfaces
-2. **Particle effects**:
-   - Dust particles when the player lands or changes direction
-   - A trail effect when dashing
-   - Explosion particles when crates break (one-shot)
-   - Ambient particles (floating dust, rain, or snow)
-3. **Audio system**:
-   - Set up audio buses: Master, SFX, Music, Ambient
-   - Add sound effects: footsteps (randomized pitch), jump, land, dash, break
-   - Add background music with crossfading between tracks
-   - Implement volume sliders in a settings menu connected to audio buses
-4. **Game feel**:
-   - Add screen shake on heavy impacts (camera offset with decay)
-   - Add hit pause (freeze frames on significant events, 50-100ms)
-   - Add squash and stretch to the player sprite on jump/land
+The agent should produce:
+- Save format (JSON for human-readable + debuggable; binary for size-conscious)
+- Versioning scheme + migration functions
+- Profile system (separate save slots)
+- Cloud-save consideration (Steam Cloud, etc.)
 
-Play without audio, then with. The difference demonstrates why audio is not optional.
+### Phase 4 — Refactor or ship? (1-2 hours)
 
-#### Key Takeaways
+The hardest discipline. When the prototype's architecture isn't right, do you refactor or ship?
 
-- Collision layers prevent performance waste: only check collisions that matter
-- Particles communicate events visually; they are feedback, not decoration
-- Audio is half the game experience: budget time for it, do not treat it as an afterthought
-- Screen shake and hit pause are cheap to implement and dramatically improve feel
+**Read:**
+- [`docs/09-advanced-patterns/`](../docs/09-advanced-patterns/) — ECS chapter (even if you don't use ECS, the thinking transfers)
 
-### Module 3: UI Systems and Scene Management
+**Talk to the architecture agent:**
 
-#### Concepts
+```
+/game-arch I have a prototype that works but feels structurally wrong. Spaghetti-style — many cross-references between systems. Player.gd directly modifies Enemy.gd state. Should I refactor or ship?
+```
 
-- Godot's UI system: Control nodes, anchors, margins, containers for responsive layout
-- Anchors and containers: how to build UI that works at different resolutions
-- Theme system: consistent styling across all UI elements
-- HUD design: showing only what the player needs, when they need it
-- Menu flow: main menu, pause menu, settings, game over and the transitions between them
-- Scene transitions: fade to black, dissolve, or custom shaders between game scenes
-- Save/load systems: serializing game state to files, loading it back
-- Localization: preparing UI for multiple languages from the start
-- Accessibility: colorblind modes, remappable controls, screen reader support, scalable text
-- Responsive UI: supporting multiple resolutions and aspect ratios
+The agent should ask:
+- How much further do you plan to take this prototype?
+- Are you blocked on a specific feature because of the architecture?
+- How big is the codebase?
 
-#### Hands-On Exercise
+Heuristic the agent applies: refactor when the architecture is blocking specific work; ship when the structural ugliness is just ugly but not blocking.
 
-Build a complete UI system for your game:
+## What you've learned
 
-1. **Main menu**: Start, Continue (if save exists), Settings, Quit
-2. **Settings screen**:
-   - Audio: volume sliders per bus (Master, SFX, Music)
-   - Display: resolution selector, fullscreen toggle, vsync toggle
-   - Controls: rebindable input actions (store in a config file)
-3. **In-game HUD**:
-   - Health bar with smooth animated changes
-   - Score/collectible counter
-   - Mini-map or compass (even if simple)
-4. **Pause menu**: Resume, Settings, Quit to Main Menu
-5. **Scene transitions**: Implement a fade-to-black transition singleton that any scene can call
-6. **Save system**:
-   - Save player position, health, score, and collected items to a JSON file
-   - Load and restore state on "Continue"
-   - Handle missing or corrupted save files gracefully
-7. **Theme**: Create a UI theme resource with consistent fonts, colors, and button styles
+By the end:
 
-Test at two different resolutions. Verify the UI scales correctly using anchors and containers.
+- Your prototype now has juice — it feels good to play, not just functional
+- You've profiled and optimized at least one bottleneck
+- You have a save system you can ship
+- You can decide when to refactor vs. when to accept tech debt
 
-#### Key Takeaways
+## Common gotchas
 
-- UI is the bridge between the game and the player: confusing UI ruins good gameplay
-- Singletons (autoloads) handle cross-scene concerns like transitions, audio, and save data
-- Plan for localization and accessibility from the start; retrofitting is expensive
-- Save systems need error handling: corrupted saves should not crash the game
+1. **Adding juice everywhere** — too much screen shake feels like a tilt-a-whirl. Restraint.
+2. **Premature pooling** — pool when you spawn > 30/sec; otherwise it's complexity for nothing.
+3. **Premature ECS migration** — ECS for a 100-entity game is over-engineering.
+4. **Forgetting save versioning** — every save format gets a version field from v1.0.0.
 
-## Assessment
+## Next: [Advanced path](advanced.md)
 
-You have completed the intermediate path when you can:
-
-1. Implement a state machine that cleanly manages complex character and AI behavior
-2. Use collision layers, raycasting, and physics bodies appropriately
-3. Create particle effects that provide meaningful visual feedback
-4. Build an audio system with buses, positional audio, and volume control
-5. Design UI that scales across resolutions with save/load functionality
-
-## Next Steps
-
-- Move to the **Advanced Path**: ECS architecture, networking, procedural generation, and shaders
-- Study game design theory: "A Game Design Vocabulary" by Anthropy and Clark
-- Analyze games you admire: recreate one mechanic and study what makes it work
-- Publish a game on itch.io and gather player feedback
+When you're ready to ship — really ship, not "release a demo on itch.io" — the advanced path covers multiplayer, telemetry, A/B testing, monetization ethics, and the platform-specific gotchas that turn launches into post-mortems.

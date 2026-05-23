@@ -1,77 +1,135 @@
-# Contributing to LibreGameDev-Claude-Code
+# Contributing
 
-Thank you for your interest in contributing. This guide covers how to add new plugins, improve existing ones, and maintain quality across the collection.
+Game dev is wide. Twenty plugins covers a lot but not everything. PRs welcome — especially genre-specific patterns, console-specific knowledge (within NDA limits), and translations of the learning paths.
 
-## Philosophy
+## What we welcome
 
-Every plugin should **empower** game developers. We build tools that teach, not tools that create dependency. If a plugin does something for the developer, it should also explain *why* and *how*.
+- **Bug fixes** in any plugin (agent, command, or skill content)
+- **Engine depth** — Godot is currently most complete; Unity + Unreal can be deepened
+- **Genre-specific patterns** — roguelikes, immersive sims, RTSes, fighting games, MMOs each have specialized patterns
+- **Mobile-specific patterns** — touch controls, battery optimization, app store review patterns
+- **Console-specific patterns** — Switch, PlayStation, Xbox (within NDA limits — generic patterns only)
+- **Web game patterns** — Phaser, Pixi, Three.js, plain Canvas
+- **Case studies** of real shipped games with permission to discuss
+- **Translations** of learning paths — game dev community is heavily ESL; non-English under-served
+- **Doc improvements** — clearer worked examples, more diagrams, better cross-references
 
-## Adding a New Plugin
+## What we don't accept
 
-### 1. Propose
+- Closed-source engines without an alternative (proprietary AAA-only patterns belong on internal docs)
+- Plugins requiring paid IDEs without a free-tier alternative
+- Patterns that violate platform-holder NDAs (Switch internals, etc.)
+- AI-generated content with no real-game verification — game dev needs domain reality testing
+- Predatory monetization patterns. Ethical monetization is welcome (see `monetization-ethics` plugin)
 
-Open an issue describing:
-- The game development domain the plugin covers
-- Why existing plugins do not already cover it
-- What agents, commands, and skills it would include
+## Setup
 
-### 2. Structure
-
-Create the following directory structure under `plugins/`:
-
-```
-plugins/your-plugin-name/
-  README.md         # 50-80 lines: description, contents, usage
-  agents/
-    AGENT.md        # 80-150 lines: identity, expertise, behavior, output
-  commands/
-    COMMAND.md      # 60-100 lines: trigger, input, process, output, examples
-  skills/
-    SKILL.md        # 60-100 lines: knowledge, patterns, anti-patterns, refs
-```
-
-### 3. Content Guidelines
-
-**README.md**: Clear description of what the plugin provides, what files are included, and practical usage examples with code.
-
-**AGENT.md**: Define a specialist persona. Include identity, areas of expertise, behavioral rules (what the agent does and does not do), preferred tools and methods, and output format.
-
-**COMMAND.md**: Specify the slash command trigger, expected input format, step-by-step process, structured output format, and at least two usage examples.
-
-**SKILL.md**: Document the knowledge base with concrete patterns (with code), anti-patterns (with explanations of why they fail), and references to authoritative sources.
-
-### 4. Quality Checklist
-
-- [ ] All four files are present and within the specified line ranges
-- [ ] No placeholder or TODO content
-- [ ] Code examples are syntactically correct
-- [ ] Anti-patterns include clear explanations
-- [ ] References point to real, authoritative sources
-- [ ] Plugin is added to the root README.md table
-
-## Improving Existing Plugins
-
-- Open a PR with a clear description of what changed and why
-- Keep changes focused: one improvement per PR
-- If adding new patterns or anti-patterns, include code examples
-- Update the CHANGELOG.md
-
-## Commit Messages
-
-Follow conventional commits:
-
-```
-type(scope): description
-
-feat(procgen): add wave function collapse patterns
-fix(godot): correct signal connection syntax in examples
-docs(readme): update plugin count badge
+```bash
+git clone https://github.com/<your-username>/LibreGameDev-Claude-Code.git
+cd LibreGameDev-Claude-Code
+./setup.sh
 ```
 
-## Code of Conduct
+Make changes, test against a real game project, then submit.
 
-All contributors must follow the [Contributor Covenant v2.1](CODE_OF_CONDUCT.md).
+## Branch + PR workflow
+
+```
+git checkout -b feat/<slug>       # new plugin or major content addition
+git checkout -b fix/<slug>        # bug fix
+git checkout -b deepen/<plugin>   # deepening an existing thin plugin
+git checkout -b docs/<slug>       # docs only
+git checkout -b casestudy/<game>  # case study addition
+```
+
+Commit format: `type(scope): description` — e.g., `deepen(unity-development): add Addressables + Render Pipeline switching patterns`.
+
+PR template:
+
+```markdown
+## Why
+<motivation in 1-3 sentences>
+
+## What changed
+<bulleted list>
+
+## How to verify
+<scenario to pose to the agent + expected response shape>
+
+## Real-game verification (if applicable)
+<which engine version, which project, what game type>
+
+## Notes
+<follow-ups, related issues, depth assessment>
+```
+
+## Plugin-authoring conventions
+
+Each plugin lives in `plugins/<name>/` with:
+
+```
+plugins/<name>/
+├── README.md       # overview of what the plugin covers + when to use
+├── agents/
+│   └── <name>.md   # specialist agent prompt
+├── commands/
+│   └── <name>.md   # slash command logic
+└── skills/
+    └── <name>.md   # reference pattern library
+```
+
+### Agent prompts
+
+Should include:
+
+- Frontmatter `name:` and `description:`
+- "Purpose" section
+- "Core Principles" — biases this agent applies
+- "Capabilities" — what it knows about, in detail
+- Real-engine grounding — reference specific engines and engine versions
+- Aim for 150-300 lines of substantive content
+
+### Commands
+
+Should include:
+
+- A clear job-to-be-done framing
+- At least one concrete code example with real engine APIs
+- A worked example from problem statement to working code
+- Awareness of common game-dev traps (pooling, fixed vs. variable timestep, frame budget)
+- Aim for 200-400 lines
+
+### Skills
+
+Should include:
+
+- A pattern library, not a tutorial
+- Cross-references to the relevant `docs/` sections
+- Common-mistakes section
+- Engine-specific notes where they differ
+- Aim for 100-200 lines
+
+## The substance bar
+
+LibreGameDev's flagship plugins (`unity-development`, `godot-development`, `multiplayer-networking`) match LibreUIUX substance — real engine expertise, real code examples in the engine's actual language, accurate API names. If you're adding a new plugin or deepening a shell, please contribute at that depth.
+
+The maturity matrix in [CHANGELOG.md](CHANGELOG.md) tracks which plugins are depth-complete and which need work.
+
+## Working with the docs/ folder
+
+The `docs/` folder is a 13-section reference. New content welcome via PR — drop into the appropriate section's directory with a clear filename. Cross-link from the section's `README.md`.
+
+Style:
+
+- Markdown, code-fenced examples
+- One concept per file
+- 5-15 minute read length
+- At least one worked example per concept
+
+## Code of conduct
+
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+By submitting a PR you agree your contribution is licensed under the same MIT license as the project. No CLA.
