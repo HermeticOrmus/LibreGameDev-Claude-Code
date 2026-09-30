@@ -1,3 +1,8 @@
+---
+name: "playtest-patterns"
+description: "Playtest Patterns"
+---
+
 # Playtest Patterns
 
 ## Death Heatmap Collection

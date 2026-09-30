@@ -1,3 +1,8 @@
+---
+name: "audio-patterns"
+description: "Audio Patterns"
+---
+
 # Audio Patterns
 
 ## Audio Bus Architecture (Godot)

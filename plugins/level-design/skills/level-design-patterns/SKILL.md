@@ -1,3 +1,8 @@
+---
+name: "level-design-patterns"
+description: "Level Design Patterns"
+---
+
 # Level Design Patterns
 
 ## Godot TileMap Configuration

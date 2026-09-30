@@ -1,3 +1,8 @@
+---
+name: "physics-patterns"
+description: "Physics Patterns"
+---
+
 # Physics Patterns
 
 ## Collision Layer Configuration

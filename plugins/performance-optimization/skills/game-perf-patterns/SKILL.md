@@ -1,3 +1,8 @@
+---
+name: "game-perf-patterns"
+description: "Game Performance Patterns"
+---
+
 # Game Performance Patterns
 
 ## MultiMeshInstance3D for Batch Rendering

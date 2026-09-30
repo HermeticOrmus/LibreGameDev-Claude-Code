@@ -1,0 +1,15 @@
+{
+  "name": "playtesting",
+  "version": "1.0.0",
+  "description": "Playtesting plugin for LibreGameDev.",
+  "author": {
+    "name": "Diego Bodart",
+    "url": "https://github.com/HermeticOrmus"
+  },
+  "homepage": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "license": "MIT",
+  "keywords": [
+    "playtesting"
+  ]
+}

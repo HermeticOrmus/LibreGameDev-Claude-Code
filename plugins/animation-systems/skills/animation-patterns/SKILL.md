@@ -1,3 +1,8 @@
+---
+name: "animation-patterns"
+description: "Animation Patterns"
+---
+
 # Animation Patterns
 
 ## Godot AnimationTree BlendSpace2D Locomotion

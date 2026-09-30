@@ -1,3 +1,8 @@
+---
+name: "game-arch-patterns"
+description: "Game Architecture Patterns"
+---
+
 # Game Architecture Patterns
 
 ## Fixed Timestep Game Loop with Accumulator

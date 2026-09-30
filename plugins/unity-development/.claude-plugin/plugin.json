@@ -1,0 +1,16 @@
+{
+  "name": "unity-development",
+  "version": "1.0.0",
+  "description": "Unity has the most surface area of any commercial game engine.",
+  "author": {
+    "name": "Diego Bodart",
+    "url": "https://github.com/HermeticOrmus"
+  },
+  "homepage": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "license": "MIT",
+  "keywords": [
+    "unity",
+    "development"
+  ]
+}

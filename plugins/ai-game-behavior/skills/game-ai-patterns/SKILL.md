@@ -1,3 +1,8 @@
+---
+name: "game-ai-patterns"
+description: "Game AI Patterns"
+---
+
 # Game AI Patterns
 
 ## Behavior Tree Node Types

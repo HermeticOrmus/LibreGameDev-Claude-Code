@@ -1,3 +1,8 @@
+---
+name: "input-patterns"
+description: "Input Patterns"
+---
+
 # Input Patterns
 
 ## Godot InputMap Action Configuration
