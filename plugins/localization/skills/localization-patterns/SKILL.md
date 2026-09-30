@@ -1,6 +1,6 @@
 ---
-name: "localization-patterns"
-description: "Localization Patterns"
+name: localization-patterns
+description: "Localization code patterns: Godot tr() and TranslationServer usage, PO file structure, ICU plurals, font fallback chains for multi-script text, RTL layout mirroring, pseudo-localization, and string key naming. Use when making a game translatable or fixing text that breaks in another language."
 ---
 
 # Localization Patterns

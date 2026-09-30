@@ -1,5 +1,6 @@
 ---
-description: "AI behavior design and implementation for NPCs."
+description: "Design, implement, debug, or tune NPC behavior with behavior trees, FSMs, utility AI, or GOAP"
+argument-hint: "[design|implement|debug|tune] <what the NPC should do>"
 ---
 
 # /game-ai

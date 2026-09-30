@@ -1,5 +1,6 @@
 ---
-description: "Ethical game monetization design, dark pattern auditing, IAP implementation, and player spending protection."
+description: "Design, audit, implement, or test game monetization against a dark pattern checklist"
+argument-hint: "[design|audit|implement|test] <store, pass, or offer>"
 ---
 
 # /monetize

@@ -1,6 +1,6 @@
 ---
-name: "procgen-patterns"
-description: "Procgen Patterns"
+name: procgen-patterns
+description: "Procedural generation code: FastNoiseLite terrain, a BSP dungeon generator, a cellular automata cave generator, a seeded room populator, and a solvability validator. Use when implementing or debugging procedural levels."
 ---
 
 # Procgen Patterns

@@ -1,7 +1,7 @@
 {
   "name": "physics-simulation",
   "version": "1.0.0",
-  "description": "Physics plugin for LibreGameDev.",
+  "description": "Game physics: body types, collision layers, character controllers, raycasts, triggers, joints, and physics performance in Godot and Unity.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,12 @@
   "license": "MIT",
   "keywords": [
     "physics",
-    "simulation"
+    "collision",
+    "rigidbody",
+    "character-controller",
+    "raycast",
+    "godot",
+    "unity",
+    "gamedev"
   ]
 }

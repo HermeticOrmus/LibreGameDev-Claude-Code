@@ -1,7 +1,7 @@
 {
   "name": "shader-programming",
   "version": "1.0.0",
-  "description": "Shader programming plugin for LibreGameDev.",
+  "description": "Real-time shaders for games: Godot shading language, vertex and fragment stages, common effects, post-processing, and shader performance.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -10,7 +10,12 @@
   "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
   "license": "MIT",
   "keywords": [
-    "shader",
-    "programming"
+    "shaders",
+    "glsl",
+    "godot-shaders",
+    "vfx",
+    "post-processing",
+    "rendering",
+    "gamedev"
   ]
 }

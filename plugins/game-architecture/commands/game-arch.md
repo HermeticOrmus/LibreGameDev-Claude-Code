@@ -1,5 +1,6 @@
 ---
-description: "Game architecture design, refactoring, testing, and profiling."
+description: "Design, refactor, test, or profile a game's code architecture"
+argument-hint: "[design|refactor|test|profile] <system or codebase area>"
 ---
 
 # /game-arch

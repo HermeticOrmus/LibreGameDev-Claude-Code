@@ -1,5 +1,6 @@
 ---
-description: "Procedural content generation: terrain, dungeons, caves, tile maps, and content placement."
+description: "Generate terrain, dungeons, or content placement procedurally, or validate generated output"
+argument-hint: "[terrain|dungeon|populate|validate] <what to generate>"
 ---
 
 # /procgen

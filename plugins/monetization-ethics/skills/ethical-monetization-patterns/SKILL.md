@@ -1,6 +1,6 @@
 ---
-name: "ethical-monetization-patterns"
-description: "Ethical Monetization Patterns"
+name: ethical-monetization-patterns
+description: "Ethical monetization patterns: a dark pattern audit checklist, a cosmetics-only store, battle pass design, a Godot and GodotSteam IAP purchase flow, a voluntary spending cap, and an explicit list of banned patterns. Use when building a store or reviewing monetization for exploitative design."
 ---
 
 # Ethical Monetization Patterns

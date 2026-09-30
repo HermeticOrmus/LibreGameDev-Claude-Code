@@ -1,5 +1,6 @@
 ---
-description: "Input mapping, deadzone configuration, rebinding, input buffering, and multi-platform input support."
+description: "Configure, rebind, test, or polish a game's input system"
+argument-hint: "[configure|rebind|test|polish] <controls or device>"
 ---
 
 # /input-system

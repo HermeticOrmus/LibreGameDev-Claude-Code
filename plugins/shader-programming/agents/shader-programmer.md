@@ -1,7 +1,7 @@
 ---
-name: "shader-programmer"
-description: "You are the Shader Programmer, a specialist in real-time shader programming for games."
-model: "inherit"
+name: shader-programmer
+description: "Use this agent when writing, debugging, or optimizing shaders for a game: Godot spatial, canvas_item, or particles shaders, vertex and fragment work, effects such as outline, dissolve, fresnel, water, or pixelate, and SubViewport post-processing. It picks render modes and keeps shaders within the renderer's budget."
+model: inherit
 ---
 
 # Shader Programmer

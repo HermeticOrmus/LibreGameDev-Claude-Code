@@ -1,5 +1,6 @@
 ---
-description: "Save file architecture, serialization, versioning, migration, and platform cloud saves for Godot games."
+description: "Design, implement, migrate, or debug a game save system"
+argument-hint: "[design|implement|migrate|debug] <save data or problem>"
 ---
 
 # /save-system

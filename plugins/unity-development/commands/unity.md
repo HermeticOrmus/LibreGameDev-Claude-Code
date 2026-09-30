@@ -1,5 +1,6 @@
 ---
-description: "You are a unity-engineer agent with deep Unity 6 expertise."
+description: "Design a Unity 6 feature and write idiomatic C#, or scaffold scenes, ScriptableObjects, input, and debugging"
+argument-hint: "[scene|scriptable|input|debug] <feature>"
 ---
 
 # Unity 6 design and implementation

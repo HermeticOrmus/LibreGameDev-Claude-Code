@@ -1,7 +1,7 @@
 {
   "name": "monetization-ethics",
   "version": "1.0.0",
-  "description": "Monetization ethics plugin for LibreGameDev.",
+  "description": "Ethical game monetization: dark pattern audits, cosmetics-only stores, fair battle passes, platform IAP flows, and player spending protection.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,10 @@
   "license": "MIT",
   "keywords": [
     "monetization",
-    "ethics"
+    "iap",
+    "battle-pass",
+    "dark-patterns",
+    "ethics",
+    "gamedev"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "name": "level-design",
   "version": "1.0.0",
-  "description": "Level design plugin for LibreGameDev.",
+  "description": "Level design and construction: greyboxing, TileMaps, modular kits, navmesh baking, level streaming, and environmental storytelling.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -10,7 +10,13 @@
   "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
   "license": "MIT",
   "keywords": [
-    "level",
-    "design"
+    "level-design",
+    "greybox",
+    "tilemap",
+    "navmesh",
+    "streaming",
+    "godot",
+    "unity",
+    "gamedev"
   ]
 }

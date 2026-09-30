@@ -1,7 +1,7 @@
 {
   "name": "multiplayer-networking",
   "version": "1.0.0",
-  "description": "Multiplayer networking is the hardest layer in game dev.",
+  "description": "Multiplayer netcode: rollback, lockstep, client prediction with reconciliation, lag compensation, bandwidth budgets, NAT traversal, and Godot or Unity networking.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,13 @@
   "license": "MIT",
   "keywords": [
     "multiplayer",
-    "networking"
+    "netcode",
+    "rollback",
+    "lockstep",
+    "client-prediction",
+    "lag-compensation",
+    "godot",
+    "unity",
+    "gamedev"
   ]
 }

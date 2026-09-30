@@ -1,7 +1,7 @@
 {
   "name": "save-systems",
   "version": "1.0.0",
-  "description": "Save system plugin for LibreGameDev.",
+  "description": "Game save systems: serialization, save file versioning and migration, atomic writes, slots, settings persistence, and platform cloud saves.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -10,7 +10,12 @@
   "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
   "license": "MIT",
   "keywords": [
-    "save",
-    "systems"
+    "save-system",
+    "serialization",
+    "persistence",
+    "migration",
+    "cloud-saves",
+    "godot",
+    "gamedev"
   ]
 }

@@ -1,6 +1,6 @@
 ---
-name: "unity-development"
-description: "Reference patterns for Unity 6 development."
+name: unity-development
+description: "Unity 6 reference patterns: an architecture decision tree, render pipeline and Addressables migration recipes, Input System patterns, a DOTS quick reference, a common mistakes catalog, component and ScriptableObject event channel patterns, and a generic object pool. Use when designing, writing, or reviewing Unity C#."
 ---
 
 # Unity development pattern library

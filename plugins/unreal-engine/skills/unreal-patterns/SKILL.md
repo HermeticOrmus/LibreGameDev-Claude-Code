@@ -1,6 +1,6 @@
 ---
-name: "unreal-patterns"
-description: "Unreal Patterns"
+name: unreal-patterns
+description: "Unreal Engine 5 C++ patterns: an ACharacter subclass with Enhanced Input, Blueprint interfaces, server RPCs for player actions, and Gameplay Tags. Use when writing gameplay code in Unreal C++."
 ---
 
 # Unreal Patterns

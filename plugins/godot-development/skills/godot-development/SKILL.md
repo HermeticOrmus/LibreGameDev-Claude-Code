@@ -1,6 +1,6 @@
 ---
-name: "godot-development"
-description: "Reference patterns for Godot 4 development."
+name: godot-development
+description: "Godot 4 reference patterns: signal-vs-call and physics-body decision tables, resource sharing traps, input handling, a common mistakes catalog, a GDScript to C# rosetta, typed class structure, pooling, autoloads, GUT tests, and collision layer constants. Use when designing, writing, or reviewing Godot 4 code."
 ---
 
 # Godot development pattern library

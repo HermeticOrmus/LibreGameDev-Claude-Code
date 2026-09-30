@@ -1,6 +1,6 @@
 ---
-name: "input-patterns"
-description: "Input Patterns"
+name: input-patterns
+description: "Game input code patterns: Godot InputMap actions, a scaled radial deadzone, jump buffer with coyote time, rebinding serialization, a mobile virtual joystick, and gamepad rumble. Use when implementing controls, remapping, or controller feel."
 ---
 
 # Input Patterns

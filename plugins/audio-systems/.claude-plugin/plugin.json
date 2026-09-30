@@ -1,7 +1,7 @@
 {
   "name": "audio-systems",
   "version": "1.0.0",
-  "description": "Audio plugin for LibreGameDev.",
+  "description": "Game audio implementation: bus architecture, spatial audio, dynamic music, sound pooling, and FMOD or Wwise integration.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,13 @@
   "license": "MIT",
   "keywords": [
     "audio",
-    "systems"
+    "sound",
+    "music",
+    "spatial-audio",
+    "fmod",
+    "wwise",
+    "godot",
+    "unity",
+    "gamedev"
   ]
 }

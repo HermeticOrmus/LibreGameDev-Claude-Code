@@ -1,5 +1,6 @@
 ---
-description: "Write, debug, and optimize shaders for Godot's spatial, canvas_item, and particles pipelines."
+description: "Write, debug, optimize, or extend a Godot shader"
+argument-hint: "[write|debug|optimize|extend] <effect>"
 ---
 
 # /shader

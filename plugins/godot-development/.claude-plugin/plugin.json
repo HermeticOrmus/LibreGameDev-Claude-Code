@@ -1,7 +1,7 @@
 {
   "name": "godot-development",
   "version": "1.0.0",
-  "description": "Godot has gone from \"the indie engine some people use\" to a genuine alternative to Unity in 4.x.",
+  "description": "Godot 4 development: Node tree and scene design, signals, resources, physics, animation, typed GDScript or C#, GDExtension, and GUT tests.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,11 @@
   "license": "MIT",
   "keywords": [
     "godot",
-    "development"
+    "godot4",
+    "gdscript",
+    "csharp",
+    "gdextension",
+    "gut",
+    "gamedev"
   ]
 }

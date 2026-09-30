@@ -1,5 +1,6 @@
 ---
-description: "Game interface design and implementation: HUD, menus, inventory, dialogue, and accessibility."
+description: "Build a HUD, menu, inventory, dialogue box, or accessibility options for a game"
+argument-hint: "[hud|menu|inventory|dialogue|accessibility] <screen>"
 ---
 
 # /game-ui

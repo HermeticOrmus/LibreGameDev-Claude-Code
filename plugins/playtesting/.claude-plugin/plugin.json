@@ -1,7 +1,7 @@
 {
   "name": "playtesting",
   "version": "1.0.0",
-  "description": "Playtesting plugin for LibreGameDev.",
+  "description": "Playtesting and game analytics: session design, observation protocols, telemetry schemas, death heatmaps, funnels, and A/B tests.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -10,6 +10,12 @@
   "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
   "license": "MIT",
   "keywords": [
-    "playtesting"
+    "playtesting",
+    "analytics",
+    "telemetry",
+    "heatmaps",
+    "ab-testing",
+    "ux-research",
+    "gamedev"
   ]
 }

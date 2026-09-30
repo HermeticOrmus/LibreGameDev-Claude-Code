@@ -1,5 +1,6 @@
 ---
-description: "Physics configuration, simulation, debugging, and optimization for Godot PhysicsServer3D."
+description: "Configure, simulate, debug, or optimize game physics"
+argument-hint: "[configure|simulate|debug|optimize] <body or interaction>"
 ---
 
 # /physics

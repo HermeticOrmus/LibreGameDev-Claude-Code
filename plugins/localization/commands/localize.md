@@ -1,5 +1,6 @@
 ---
-description: "Game localization: string extraction, PO file management, plural forms, RTL support, and CJK font setup."
+description: "Extract strings, manage translations, test, or ship a localized game build"
+argument-hint: "[extract|translate|test|ship] <language or scope>"
 ---
 
 # /localize
