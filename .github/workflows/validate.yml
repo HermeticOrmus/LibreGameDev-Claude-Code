@@ -35,3 +35,13 @@ jobs:
             claude plugin install "$p@$mk"
           done
           claude plugin list
+      - name: Fail if any installed plugin reports load errors
+        run: |
+          set -euo pipefail
+          export CLAUDE_CONFIG_DIR="$RUNNER_TEMP/claude-config"
+          broken=$(claude plugin list --json | jq -r '.[] | select((.errors // []) | length > 0) | "\(.id): \(.errors | join("; "))"')
+          if [ -n "$broken" ]; then
+            echo "$broken"
+            exit 1
+          fi
+          echo "All installed plugins loaded without errors."

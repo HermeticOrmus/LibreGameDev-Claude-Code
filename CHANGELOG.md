@@ -13,7 +13,7 @@ These plugins also ship in [claude-code-game-development](https://github.com/Her
 - `libre-gamedev-hooks`, an optional plugin that wires the hook scripts into Claude Code: one line of context at session start for Godot, Unity, Unreal, and web game projects; a confirmation prompt before a tool touches `.env` files, keys, Android keystores, Godot export credentials, or credentials files, and before `rm -rf`, force pushes, hard resets, or `git clean -f`; a note after a write leaves a file empty, and a once-per-session reminder to run the tests after a code change.
 - Argument hints on every command, listing its actions (for example `/godot [scene|script|extend|test] <feature>`).
 - `setup.sh --list`, `--scope`, and `--uninstall`.
-- A CI workflow that validates the marketplace and every plugin, then installs all of them into a clean config.
+- A CI workflow that validates the marketplace and every plugin, installs all of them into a clean config, and fails if any plugin reports load errors.
 - A feedback issue form (`.github/ISSUE_TEMPLATE/feedback.yml`).
 
 ### Changed
