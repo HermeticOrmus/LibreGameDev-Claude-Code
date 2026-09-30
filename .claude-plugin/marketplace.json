@@ -128,6 +128,12 @@
       "source": "./plugins/unreal-engine",
       "description": "Unreal Engine 5 development: Gameplay Framework, Blueprint or C++, the Gameplay Ability System, Enhanced Input, replication, and Lumen and Nanite.",
       "version": "1.0.0"
+    },
+    {
+      "name": "libre-gamedev-hooks",
+      "source": "./plugins/libre-gamedev-hooks",
+      "description": "Optional game dev hooks: a one-line note when the project is Godot, Unity, Unreal, or a web game, confirmation before touching secrets or signing keys or running destructive commands, and a check after writes.",
+      "version": "1.0.0"
     }
   ]
 }
