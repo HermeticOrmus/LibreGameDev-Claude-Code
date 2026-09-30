@@ -1,5 +1,6 @@
 ---
-description: "You are a godot-engineer agent with deep expertise in Godot 4."
+description: "Design a Godot 4 Node tree and write idiomatic GDScript or C#, or scaffold scenes, GDExtension code, and GUT tests"
+argument-hint: "[scene|script|extend|test] <feature>"
 ---
 
 # Godot 4 design and implementation

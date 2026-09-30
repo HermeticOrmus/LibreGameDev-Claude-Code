@@ -1,7 +1,7 @@
 {
   "name": "ai-game-behavior",
   "version": "1.0.0",
-  "description": "Game AI plugin for LibreGameDev.",
+  "description": "NPC and enemy AI for games: behavior trees, state machines, utility AI, GOAP, navmesh pathfinding, and perception systems.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -10,8 +10,13 @@
   "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
   "license": "MIT",
   "keywords": [
-    "ai",
-    "game",
-    "behavior"
+    "game-ai",
+    "npc",
+    "behavior-trees",
+    "fsm",
+    "utility-ai",
+    "goap",
+    "pathfinding",
+    "gamedev"
   ]
 }

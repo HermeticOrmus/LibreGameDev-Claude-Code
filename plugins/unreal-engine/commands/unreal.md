@@ -1,5 +1,6 @@
 ---
-description: "Unreal Engine 5 development: Gameplay Framework, Blueprint/C++, GAS, replication, materials, and Lumen/Nanite."
+description: "Create actors, set up the Gameplay Framework, build abilities, or debug an Unreal Engine 5 project"
+argument-hint: "[actor|framework|ability|debug] <feature>"
 ---
 
 # /unreal

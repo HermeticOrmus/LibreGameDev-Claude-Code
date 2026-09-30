@@ -1,7 +1,7 @@
 {
   "name": "unity-development",
   "version": "1.0.0",
-  "description": "Unity has the most surface area of any commercial game engine.",
+  "description": "Unity 6 development: MonoBehaviour or DOTS architecture, URP and HDRP, Addressables, the Input System, ScriptableObjects, and idiomatic C#.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,11 @@
   "license": "MIT",
   "keywords": [
     "unity",
-    "development"
+    "unity6",
+    "csharp",
+    "dots",
+    "urp",
+    "addressables",
+    "gamedev"
   ]
 }

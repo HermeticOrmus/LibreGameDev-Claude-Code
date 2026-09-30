@@ -1,5 +1,6 @@
 ---
-description: "Game performance profiling, batching, LOD configuration, and object pooling."
+description: "Profile a game, batch draw calls, configure LODs, or add object pooling"
+argument-hint: "[profile|batch|lod|pool] <scene or symptom>"
 ---
 
 # /game-perf

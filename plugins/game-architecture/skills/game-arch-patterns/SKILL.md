@@ -1,6 +1,6 @@
 ---
-name: "game-arch-patterns"
-description: "Game Architecture Patterns"
+name: game-arch-patterns
+description: "Game architecture code patterns: a fixed timestep loop with accumulator, an EventBus, ECS-style composition in Godot, Resource-based game data, an autoload service locator, and a game state stack. Use when laying out the core structure of a game or untangling one that has grown messy."
 ---
 
 # Game Architecture Patterns

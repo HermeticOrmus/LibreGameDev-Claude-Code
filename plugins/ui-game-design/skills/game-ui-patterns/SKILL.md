@@ -1,6 +1,6 @@
 ---
-name: "game-ui-patterns"
-description: "Game UI Patterns"
+name: game-ui-patterns
+description: "Game UI code patterns: a HUD health bar, a menu state stack, an inventory grid with drag and drop, a typewriter dialogue box, a screen-edge-aware tooltip, and a settings menu with live preview. Use when implementing game interface screens in Godot."
 ---
 
 # Game UI Patterns

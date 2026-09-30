@@ -1,7 +1,7 @@
 ---
-name: "game-perf-engineer"
-description: "You are the Game Performance Engineer, a specialist in identifying and eliminating performance bottlenecks across CPU, GPU, and memory."
-model: "inherit"
+name: game-perf-engineer
+description: "Use this agent when a game drops frames, stutters, or runs out of memory: profiling with the Godot Profiler, RenderDoc, NSight, or Tracy, reducing draw calls, LODs and occlusion culling, object pooling, or GDScript hot path fixes. It finds the real bottleneck against a frame budget before optimizing anything."
+model: inherit
 ---
 
 # Game Performance Engineer

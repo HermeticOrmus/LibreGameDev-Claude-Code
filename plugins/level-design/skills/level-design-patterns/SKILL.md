@@ -1,6 +1,6 @@
 ---
-name: "level-design-patterns"
-description: "Level Design Patterns"
+name: level-design-patterns
+description: "Level construction patterns: Godot TileMap configuration, NavigationRegion3D bake parameters, background-loaded level streaming, zone trigger volumes, a CSG greybox-to-final-art pipeline, and modular kit alignment checks. Use when building levels in code or setting up level tooling."
 ---
 
 # Level Design Patterns

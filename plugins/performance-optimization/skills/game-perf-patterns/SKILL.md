@@ -1,6 +1,6 @@
 ---
-name: "game-perf-patterns"
-description: "Game Performance Patterns"
+name: game-perf-patterns
+description: "Game performance patterns: MultiMeshInstance3D batching, a custom performance monitor, a generic object pool, LOD visibility ranges, GDScript hot path optimization, and deferred processing for expensive work. Use when optimizing frame time or memory in a game."
 ---
 
 # Game Performance Patterns

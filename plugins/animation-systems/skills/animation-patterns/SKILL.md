@@ -1,6 +1,6 @@
 ---
-name: "animation-patterns"
-description: "Animation Patterns"
+name: animation-patterns
+description: "Animation code patterns: Godot BlendSpace2D locomotion, AnimationNodeStateMachine transitions, root motion integration, IK foot planting, call-method animation events, and a Unity 2D freeform blend tree. Use when implementing character locomotion, animation state logic, or IK in a game."
 ---
 
 # Animation Patterns

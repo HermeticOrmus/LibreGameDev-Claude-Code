@@ -1,5 +1,6 @@
 ---
-description: "Level construction: greyboxing, TileMap configuration, NavMesh baking, zone streaming, and environmental design."
+description: "Greybox a level, set up tiles, bake navigation, or prepare a level for export"
+argument-hint: "[greybox|tile|nav|export] <level or area>"
 ---
 
 # /level-design

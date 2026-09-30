@@ -1,6 +1,6 @@
 ---
-name: "audio-patterns"
-description: "Audio Patterns"
+name: audio-patterns
+description: "Game audio code patterns: a Godot bus layout, an audio player pool, randomized one-shot playback, vertical-remix dynamic music, 3D occlusion approximation, and FMOD integration in Godot. Use when writing sound playback, music, or mixing code for a game."
 ---
 
 # Audio Patterns

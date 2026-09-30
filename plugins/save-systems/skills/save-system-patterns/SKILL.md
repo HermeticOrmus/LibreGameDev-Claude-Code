@@ -1,6 +1,6 @@
 ---
-name: "save-system-patterns"
-description: "Save System Patterns"
+name: save-system-patterns
+description: "Save system code patterns: a core save manager, a save data model, slot metadata for load screens, and settings persistence kept separate from game saves. Use when implementing saving and loading in a game."
 ---
 
 # Save System Patterns

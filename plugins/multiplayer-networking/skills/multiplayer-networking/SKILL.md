@@ -1,6 +1,6 @@
 ---
-name: "multiplayer-networking"
-description: "Reference patterns for game multiplayer netcode."
+name: multiplayer-networking
+description: "Netcode reference patterns: a model comparison, a common mistakes catalog (rubber-banding, desync, bandwidth), delta encoding and quantization, reconciliation smoothing, a Unity library comparison, NAT traversal, and Godot MultiplayerSynchronizer, prediction, interpolation, and ENet setup. Use when writing or debugging networked game code."
 ---
 
 # Multiplayer networking pattern library

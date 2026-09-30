@@ -1,6 +1,6 @@
 ---
-name: "physics-patterns"
-description: "Physics Patterns"
+name: physics-patterns
+description: "Game physics code patterns: collision layer configuration, a full CharacterBody3D controller, RigidBody3D interaction, raycasting, Area3D triggers, and a hinge door joint. Use when writing movement, collision, or physics interaction code."
 ---
 
 # Physics Patterns

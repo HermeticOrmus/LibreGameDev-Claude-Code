@@ -1,5 +1,6 @@
 ---
-description: "Game audio implementation: bus architecture, spatial audio, dynamic music, audio pooling, and FMOD/Wwise integration."
+description: "Design, implement, mix, or optimize a game audio system"
+argument-hint: "[design|implement|mix|optimize] <sound or music system>"
 ---
 
 # /game-audio

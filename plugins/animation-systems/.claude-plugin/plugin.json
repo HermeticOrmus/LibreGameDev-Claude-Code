@@ -1,7 +1,7 @@
 {
   "name": "animation-systems",
   "version": "1.0.0",
-  "description": "Animation plugin for LibreGameDev.",
+  "description": "Game animation systems: blend trees, state machines, IK, root motion, and animation events across Godot AnimationTree, Unity Animator, and Unreal AnimGraph.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,12 @@
   "license": "MIT",
   "keywords": [
     "animation",
-    "systems"
+    "blend-trees",
+    "inverse-kinematics",
+    "root-motion",
+    "godot",
+    "unity",
+    "unreal",
+    "gamedev"
   ]
 }

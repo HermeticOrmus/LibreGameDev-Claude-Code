@@ -1,7 +1,7 @@
 {
   "name": "unreal-engine",
   "version": "1.0.0",
-  "description": "Unreal Engine 5 plugin for LibreGameDev.",
+  "description": "Unreal Engine 5 development: Gameplay Framework, Blueprint or C++, the Gameplay Ability System, Enhanced Input, replication, and Lumen and Nanite.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,11 @@
   "license": "MIT",
   "keywords": [
     "unreal",
-    "engine"
+    "unreal-engine-5",
+    "cpp",
+    "blueprints",
+    "gas",
+    "replication",
+    "gamedev"
   ]
 }

@@ -1,6 +1,6 @@
 ---
-name: "game-ai-patterns"
-description: "Game AI Patterns"
+name: game-ai-patterns
+description: "Game AI code patterns: behavior tree node types, FSM transition tables, utility AI consideration curves, GOAP action definitions, Godot NavMesh agent setup, and field-of-view sensing. Use when writing or reviewing NPC decision-making, pathfinding, or perception code."
 ---
 
 # Game AI Patterns

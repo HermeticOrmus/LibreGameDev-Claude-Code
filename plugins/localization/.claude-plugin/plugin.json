@@ -1,7 +1,7 @@
 {
   "name": "localization",
   "version": "1.0.0",
-  "description": "Localization plugin for LibreGameDev.",
+  "description": "Game localization: string extraction, gettext PO files, ICU plurals, right-to-left layout, CJK font fallback, and pseudo-localization.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -10,6 +10,13 @@
   "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
   "license": "MIT",
   "keywords": [
-    "localization"
+    "localization",
+    "i18n",
+    "l10n",
+    "gettext",
+    "rtl",
+    "fonts",
+    "godot",
+    "gamedev"
   ]
 }

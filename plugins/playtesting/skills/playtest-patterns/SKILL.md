@@ -1,6 +1,6 @@
 ---
-name: "playtest-patterns"
-description: "Playtest Patterns"
+name: playtest-patterns
+description: "Playtest instrumentation patterns: death heatmap collection, an analytics event schema, a time-per-zone tracker, a session guide template, and A/B test assignment. Use when adding telemetry to a build or preparing a playtest session."
 ---
 
 # Playtest Patterns

@@ -1,5 +1,6 @@
 ---
-description: "Playtesting session design, data collection, analytics implementation, and findings analysis."
+description: "Design a playtest, instrument a build, analyze results, or write the findings report"
+argument-hint: "[design|instrument|analyze|report] <build or question>"
 ---
 
 # /playtest

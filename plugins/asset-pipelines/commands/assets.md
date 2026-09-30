@@ -1,5 +1,6 @@
 ---
-description: "Asset import, optimization, atlasing, LOD, and compression pipeline management."
+description: "Import, atlas, optimize, or bundle game assets with the right settings per platform"
+argument-hint: "[import|atlas|optimize|bundle] <assets or folder>"
 ---
 
 # /assets

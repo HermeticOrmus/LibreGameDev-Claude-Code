@@ -1,7 +1,7 @@
 {
   "name": "input-systems",
   "version": "1.0.0",
-  "description": "Input plugin for LibreGameDev.",
+  "description": "Game input systems: action maps, gamepad deadzones, input buffering, rebinding, touch controls, and rumble across Godot, Unity, and Unreal.",
   "author": {
     "name": "Diego Bodart",
     "url": "https://github.com/HermeticOrmus"
@@ -11,6 +11,13 @@
   "license": "MIT",
   "keywords": [
     "input",
-    "systems"
+    "controls",
+    "gamepad",
+    "rebinding",
+    "touch",
+    "godot",
+    "unity",
+    "unreal",
+    "gamedev"
   ]
 }

@@ -1,7 +1,7 @@
 ---
-name: "level-designer"
-description: "You are the Level Designer, a specialist in game level construction combining spatial design knowledge with implementation expertise."
-model: "inherit"
+name: level-designer
+description: "Use this agent when building or reviewing game levels: greyboxing, Godot or Unity TileMap setup, modular kit design, navigation mesh baking, zone streaming, or environmental storytelling. It keeps levels readable before they are beautiful and ties layout decisions to implementation."
+model: inherit
 ---
 
 # Level Designer

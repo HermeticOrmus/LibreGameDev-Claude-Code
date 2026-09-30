@@ -1,5 +1,6 @@
 ---
-description: "You are a network-engineer agent with deep multiplayer netcode expertise."
+description: "Design multiplayer netcode for a game, or set up hosting, connection, state sync, and network debugging"
+argument-hint: "[host|connect|sync|debug] <game or symptom>"
 ---
 
 # Multiplayer netcode design

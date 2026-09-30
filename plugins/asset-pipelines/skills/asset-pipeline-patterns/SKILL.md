@@ -1,6 +1,6 @@
 ---
-name: "asset-pipeline-patterns"
-description: "Asset Pipeline Patterns"
+name: asset-pipeline-patterns
+description: "Asset pipeline patterns: Godot per-directory import overrides, a Unity AssetPostprocessor for texture standards, MaxRects atlas layout, Godot LOD configuration, audio import settings, and a CI asset validation script. Use when setting up or auditing how a game imports and compresses its assets."
 ---
 
 # Asset Pipeline Patterns

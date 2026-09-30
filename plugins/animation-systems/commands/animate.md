@@ -1,5 +1,6 @@
 ---
-description: "Animation system design, implementation, and debugging for Godot, Unity, and Unreal."
+description: "Set up, blend, add IK to, or wire events into a game animation system"
+argument-hint: "[setup|blend|ik|events] <character or animation>"
 ---
 
 # /animate
