@@ -1,0 +1,16 @@
+{
+  "name": "monetization-ethics",
+  "version": "1.0.0",
+  "description": "Monetization ethics plugin for LibreGameDev.",
+  "author": {
+    "name": "Diego Bodart",
+    "url": "https://github.com/HermeticOrmus"
+  },
+  "homepage": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "license": "MIT",
+  "keywords": [
+    "monetization",
+    "ethics"
+  ]
+}

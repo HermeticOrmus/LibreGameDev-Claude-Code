@@ -1,0 +1,16 @@
+{
+  "name": "performance-optimization",
+  "version": "1.0.0",
+  "description": "Performance plugin for LibreGameDev.",
+  "author": {
+    "name": "Diego Bodart",
+    "url": "https://github.com/HermeticOrmus"
+  },
+  "homepage": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "license": "MIT",
+  "keywords": [
+    "performance",
+    "optimization"
+  ]
+}

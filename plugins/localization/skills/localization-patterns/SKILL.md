@@ -1,3 +1,8 @@
+---
+name: "localization-patterns"
+description: "Localization Patterns"
+---
+
 # Localization Patterns
 
 ## Godot TranslationServer and tr() Usage

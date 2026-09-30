@@ -1,3 +1,8 @@
+---
+name: "game-ui-patterns"
+description: "Game UI Patterns"
+---
+
 # Game UI Patterns
 
 ## HUD Health Bar

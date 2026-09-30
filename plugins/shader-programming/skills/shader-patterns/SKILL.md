@@ -1,3 +1,8 @@
+---
+name: "shader-patterns"
+description: "Shader Patterns"
+---
+
 # Shader Patterns
 
 ## Dissolve Effect (Godot Spatial)

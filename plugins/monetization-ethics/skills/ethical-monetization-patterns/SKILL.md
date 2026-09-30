@@ -1,3 +1,8 @@
+---
+name: "ethical-monetization-patterns"
+description: "Ethical Monetization Patterns"
+---
+
 # Ethical Monetization Patterns
 
 ## Dark Pattern Audit Checklist

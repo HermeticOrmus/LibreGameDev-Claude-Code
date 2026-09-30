@@ -1,3 +1,8 @@
+---
+name: "procgen-patterns"
+description: "Procgen Patterns"
+---
+
 # Procgen Patterns
 
 ## FastNoiseLite Terrain Generation

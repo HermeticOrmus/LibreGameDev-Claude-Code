@@ -1,3 +1,8 @@
+---
+name: "asset-pipeline-patterns"
+description: "Asset Pipeline Patterns"
+---
+
 # Asset Pipeline Patterns
 
 ## Godot Import Override by Directory

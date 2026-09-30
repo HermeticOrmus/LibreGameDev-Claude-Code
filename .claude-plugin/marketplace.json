@@ -1,0 +1,133 @@
+{
+  "name": "libre-gamedev",
+  "owner": {
+    "name": "Diego Bodart",
+    "url": "https://github.com/HermeticOrmus"
+  },
+  "metadata": {
+    "description": "Twenty game development plugins for Claude Code: engines (Godot, Unity, Unreal), core systems, rendering, audio, gameplay, and shipping.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ai-game-behavior",
+      "source": "./plugins/ai-game-behavior",
+      "description": "Game AI plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "animation-systems",
+      "source": "./plugins/animation-systems",
+      "description": "Animation plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "asset-pipelines",
+      "source": "./plugins/asset-pipelines",
+      "description": "Asset pipeline plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "audio-systems",
+      "source": "./plugins/audio-systems",
+      "description": "Audio plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "game-architecture",
+      "source": "./plugins/game-architecture",
+      "description": "Game architecture plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "godot-development",
+      "source": "./plugins/godot-development",
+      "description": "Godot has gone from \"the indie engine some people use\" to a genuine alternative to Unity in 4.x.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "input-systems",
+      "source": "./plugins/input-systems",
+      "description": "Input plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "level-design",
+      "source": "./plugins/level-design",
+      "description": "Level design plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "localization",
+      "source": "./plugins/localization",
+      "description": "Localization plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "monetization-ethics",
+      "source": "./plugins/monetization-ethics",
+      "description": "Monetization ethics plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "multiplayer-networking",
+      "source": "./plugins/multiplayer-networking",
+      "description": "Multiplayer networking is the hardest layer in game dev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "performance-optimization",
+      "source": "./plugins/performance-optimization",
+      "description": "Performance plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "physics-simulation",
+      "source": "./plugins/physics-simulation",
+      "description": "Physics plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "playtesting",
+      "source": "./plugins/playtesting",
+      "description": "Playtesting plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "procedural-generation",
+      "source": "./plugins/procedural-generation",
+      "description": "Procedural generation plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "save-systems",
+      "source": "./plugins/save-systems",
+      "description": "Save system plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "shader-programming",
+      "source": "./plugins/shader-programming",
+      "description": "Shader programming plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "ui-game-design",
+      "source": "./plugins/ui-game-design",
+      "description": "Game UI plugin for LibreGameDev.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "unity-development",
+      "source": "./plugins/unity-development",
+      "description": "Unity has the most surface area of any commercial game engine.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "unreal-engine",
+      "source": "./plugins/unreal-engine",
+      "description": "Unreal Engine 5 plugin for LibreGameDev.",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "animation-systems",
+  "version": "1.0.0",
+  "description": "Animation plugin for LibreGameDev.",
+  "author": {
+    "name": "Diego Bodart",
+    "url": "https://github.com/HermeticOrmus"
+  },
+  "homepage": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "repository": "https://github.com/HermeticOrmus/LibreGameDev-Claude-Code",
+  "license": "MIT",
+  "keywords": [
+    "animation",
+    "systems"
+  ]
+}
