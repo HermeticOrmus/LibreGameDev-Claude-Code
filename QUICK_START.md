@@ -99,14 +99,14 @@ Expected output:
 ## 7. Add particle effects on hit
 
 ```
-/animation add particle effects when bullets hit enemies. Use Godot's GPUParticles2D for an explosion effect. 50 particles per explosion, fade over 0.5 seconds, gravity-affected, varied colors (orange + yellow + red).
+/animate add particle effects when bullets hit enemies. Use Godot's GPUParticles2D for an explosion effect. 50 particles per explosion, fade over 0.5 seconds, gravity-affected, varied colors (orange + yellow + red).
 ```
 
 Expected output:
 - A `HitParticles` scene with `GPUParticles2D` configured (not pooled — Godot's GPU particles are cheap)
 - `ParticleProcessMaterial` settings: emission shape sphere, gravity, color ramp, scale curve
 - A way to call `emit_particles_at(position)` from the Bullet's collision handler
-- Note: if you spawn > 30 explosions per second, consider pooling — `/animation` will tell you the threshold
+- Note: if you spawn > 30 explosions per second, consider pooling — `/animate` will tell you the threshold
 
 ## 8. Add HUD + game over
 
@@ -123,7 +123,7 @@ Expected output:
 ## 9. Performance check
 
 ```
-/perf-game I built the space shooter prototype. 200 bullets, 10 enemies, hit particles. Profile and tell me what's likely the bottleneck on a 5-year-old laptop.
+/game-perf I built the space shooter prototype. 200 bullets, 10 enemies, hit particles. Profile and tell me what's likely the bottleneck on a 5-year-old laptop.
 ```
 
 Expected response — the agent should:
@@ -158,7 +158,7 @@ The pattern across all 20 plugins is the same:
 - **[Beginner path](learning-paths/beginner.md)** — curated reading order if you're new to games
 - **[Intermediate path](learning-paths/intermediate.md)** — polish, juice, performance for your second prototype
 - **[Advanced path](learning-paths/advanced.md)** — multiplayer, shipping, monetization, post-launch ops
-- **[Reference docs](docs/)** — 13-section game dev manual, lookup-style
+- **[Reference docs](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs)** — 13-section game dev manual, lookup-style
 
 ## Troubleshooting
 

@@ -104,7 +104,7 @@ Should include:
 Should include:
 
 - A pattern library, not a tutorial
-- Cross-references to the relevant `docs/` sections
+- Cross-references to the relevant sections of the [reference manual](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs)
 - Common-mistakes section
 - Engine-specific notes where they differ
 - Aim for 100-200 lines
@@ -117,7 +117,7 @@ The maturity matrix in [CHANGELOG.md](CHANGELOG.md) tracks which plugins are dep
 
 ## Working with the docs/ folder
 
-The `docs/` folder is a 13-section reference. New content welcome via PR — drop into the appropriate section's directory with a clear filename. Cross-link from the section's `README.md`.
+The 13-section reference manual lives in [claude-code-game-development/docs](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs), not in this repo. New reference content is welcome there via PR: drop it into the appropriate section's directory with a clear filename and cross-link it from the section's `README.md`. New plugin work also goes to claude-code-game-development, which ships these plugins and keeps growing them.
 
 Style:
 
