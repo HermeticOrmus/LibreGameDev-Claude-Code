@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.0.0] - 2026-09-30
+
+This release makes the pack installable. Until now `setup.sh` copied plugin folders into `~/.claude/plugins/`, which Claude Code does not load plugins from, and the files sat in nested `AGENT.md` / `COMMAND.md` folders that Claude Code does not read either. After this release every agent, command, and skill loads through Claude Code's plugin system.
+
+These plugins also ship in [claude-code-game-development](https://github.com/HermeticOrmus/claude-code-game-development) v2.0.0, which is where they keep growing. This pack stays installable as it is.
+
+### Added
+
+- `.claude-plugin/marketplace.json`: the repo is now the `libre-gamedev` plugin marketplace. Install with `/plugin marketplace add HermeticOrmus/LibreGameDev-Claude-Code` and `/plugin install <plugin>@libre-gamedev`.
+- A `plugin.json` manifest for each of the 20 plugins, with a description and keywords.
+- `libre-gamedev-hooks`, an optional plugin that wires the hook scripts into Claude Code: one line of context at session start for Godot, Unity, Unreal, and web game projects; a confirmation prompt before a tool touches `.env` files, keys, Android keystores, Godot export credentials, or credentials files, and before `rm -rf`, force pushes, hard resets, or `git clean -f`; a note after a write leaves a file empty, and a once-per-session reminder to run the tests after a code change.
+- Argument hints on every command, listing its actions (for example `/godot [scene|script|extend|test] <feature>`).
+- `setup.sh --list`, `--scope`, and `--uninstall`.
+- A CI workflow that validates the marketplace and every plugin, then installs all of them into a clean config.
+- A feedback issue form (`.github/ISSUE_TEMPLATE/feedback.yml`).
+
+### Changed
+
+- `setup.sh` now installs through `claude plugin install` instead of copying folders. `--only` works as before; `--plugins-dir` is accepted but no longer used. It needs the `claude` CLI and `jq`.
+- Files moved to the layout Claude Code loads: `agents/<name>.md`, `commands/<name>.md`, `skills/<name>/SKILL.md`. Content moved with them unchanged.
+- `godot-development`, `unity-development`, and `multiplayer-networking` each carried two agents, two commands, and two skills (the v0.2 depth-complete files and the older v0.1 files). Each now has one of each: the v0.2 file stays primary and every section of the older file is merged into it (typed GDScript and GUT patterns, ScriptableObject event channels, Godot netcode code, and the per-action command reference).
+- Every agent, command, and skill description is rewritten to say when to use it, so Claude picks the right one. Agents use `model: inherit` (the Godot, Unity, and network agents were pinned to `sonnet`), so they follow the model you run.
+- The hook scripts moved from `hooks/` into `plugins/libre-gamedev-hooks/hooks/` and now read the JSON Claude Code sends on stdin. They no longer write log files.
+- README: install instructions for Claude Code, a terminal, and a checkout; plugin tables that list each plugin's real agent, command, and skill; counts that match the manifests; a Feedback section.
+
+### Fixed
+
+- Command names in the README, QUICK_START, TROUBLESHOOTING, and learning paths now match the real commands: `/animate`, `/game-audio`, `/game-perf`, `/save-system`, `/input-system`, and `/level-design` (the docs said `/animation`, `/audio`, `/perf-game`, `/save`, `/input`, and `/level`, which do not exist).
+- Links to the reference manual pointed at a `docs/` folder that is not in this repo. They now point at the manual in claude-code-game-development.
+- TROUBLESHOOTING's install check now uses `claude plugin list` instead of listing `~/.claude/plugins/`.
+
+### For existing users
+
+If you ran the old `setup.sh`, you have `~/.claude/plugins/libre-gamedev-*` folders that Claude Code never loaded. You can delete them, then run `./setup.sh` (or the `/plugin` commands above).
+
 ## [0.2.0] — 2026-05-23
 
 Major content depth pass. 20 plugin shells filled with the LibreUIUX template chrome plus a 1.8 MB reference manual (docs/) imported from sibling repo for genuine game-dev expertise. Three flagship plugins promoted to depth-complete.
