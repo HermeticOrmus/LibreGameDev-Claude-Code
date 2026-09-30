@@ -15,30 +15,30 @@ You've made a prototype. It works. But the second one's tech debt is biting and 
 ### Phase 1 — Game feel (4-6 hours)
 
 **Read:**
-- [`docs/02-core-game-concepts/`](../docs/02-core-game-concepts/) — full section, focus on game-feel chapter
-- [`docs/05-audio-systems/`](../docs/05-audio-systems/) — adaptive music + sound effects
+- [`docs/02-core-game-concepts/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/02-core-game-concepts) — full section, focus on game-feel chapter
+- [`docs/05-audio-systems/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/05-audio-systems) — adaptive music + sound effects
 
 **Then iterate on your prototype:**
 
 ```
-/animation Walk me through adding juice to my 2D platformer. I want: squash-and-stretch on landing, screen shake on heavy hits, particle dust on running, slow-motion on critical hits, freeze-frame on impact, controller rumble.
+/animate Walk me through adding juice to my 2D platformer. I want: squash-and-stretch on landing, screen shake on heavy hits, particle dust on running, slow-motion on critical hits, freeze-frame on impact, controller rumble.
 ```
 
 The agent should give you a prioritized list. Start with screen shake + impact freeze (highest impact-to-effort ratio).
 
 ```
-/audio Design the audio palette for my 2D platformer. Music should adapt to combat (start subdued, intensify during combat, resolve after). Sound effects should layer (footsteps + jumps + landings + ambient). Don't recommend specific assets — give me the design.
+/game-audio Design the audio palette for my 2D platformer. Music should adapt to combat (start subdued, intensify during combat, resolve after). Sound effects should layer (footsteps + jumps + landings + ambient). Don't recommend specific assets — give me the design.
 ```
 
 ### Phase 2 — Performance optimization (3-5 hours)
 
 **Read:**
-- [`docs/10-performance-optimization/`](../docs/10-performance-optimization/) — full section in order
+- [`docs/10-performance-optimization/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/10-performance-optimization) — full section in order
 
 **Profile your prototype:**
 
 ```
-/perf-game I built a prototype in Godot 4 (or Unity 6). It runs at 60 FPS on my machine but drops to 30 FPS on my older laptop. Where do I start optimizing?
+/game-perf I built a prototype in Godot 4 (or Unity 6). It runs at 60 FPS on my machine but drops to 30 FPS on my older laptop. Where do I start optimizing?
 ```
 
 The agent should insist on profiling before optimizing. Run the engine's profiler. Identify the actual bottleneck. Then optimize the bottleneck specifically.
@@ -55,12 +55,12 @@ Common bottleneck categories:
 You'll need save / load for any non-arcade game.
 
 **Read:**
-- [`docs/02-core-game-concepts/`](../docs/02-core-game-concepts/) — state management + persistence chapters
+- [`docs/02-core-game-concepts/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/02-core-game-concepts) — state management + persistence chapters
 
 **Implement:**
 
 ```
-/save Design a save system for my 2D platformer. Requirements: player progress (level, items, stats), settings (audio, controls, graphics), profile-based (multiple profiles), versioned (so v1 saves still load after I update the game).
+/save-system Design a save system for my 2D platformer. Requirements: player progress (level, items, stats), settings (audio, controls, graphics), profile-based (multiple profiles), versioned (so v1 saves still load after I update the game).
 ```
 
 The agent should produce:
@@ -74,7 +74,7 @@ The agent should produce:
 The hardest discipline. When the prototype's architecture isn't right, do you refactor or ship?
 
 **Read:**
-- [`docs/09-advanced-patterns/`](../docs/09-advanced-patterns/) — ECS chapter (even if you don't use ECS, the thinking transfers)
+- [`docs/09-advanced-patterns/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/09-advanced-patterns) — ECS chapter (even if you don't use ECS, the thinking transfers)
 
 **Talk to the architecture agent:**
 

@@ -16,7 +16,7 @@ You're shipping. Now the work is multiplayer netcode that survives real networks
 ### Phase 1 — Multiplayer netcode (8-15 hours)
 
 **Read:**
-- [`docs/06-networking-multiplayer/`](../docs/06-networking-multiplayer/) — full section, especially rollback / lockstep / prediction patterns
+- [`docs/06-networking-multiplayer/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/06-networking-multiplayer) — full section, especially rollback / lockstep / prediction patterns
 
 **Pick your model:**
 
@@ -45,8 +45,8 @@ You then implement against a real library.
 ### Phase 2 — Telemetry + crash reporting (4-6 hours)
 
 **Read:**
-- [`docs/11-testing-qa/`](../docs/11-testing-qa/) — full section
-- [`docs/12-deployment-distribution/`](../docs/12-deployment-distribution/) — deployment + monitoring chapters
+- [`docs/11-testing-qa/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/11-testing-qa) — full section
+- [`docs/12-deployment-distribution/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/12-deployment-distribution) — deployment + monitoring chapters
 
 **Implement:**
 
@@ -74,7 +74,7 @@ Engine-specific patterns:
 ### Phase 3 — A/B testing + balance (3-4 hours)
 
 **Read:**
-- [`docs/13-case-studies/`](../docs/13-case-studies/) — if shipped with case studies, read all; otherwise reference how popular games use A/B testing
+- [`docs/13-case-studies/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/13-case-studies) — if shipped with case studies, read all; otherwise reference how popular games use A/B testing
 
 **Talk to the playtest agent:**
 
@@ -92,7 +92,7 @@ The agent should walk:
 ### Phase 4 — Monetization ethics (2-4 hours)
 
 **Read:**
-- [`docs/12-deployment-distribution/`](../docs/12-deployment-distribution/) — distribution + monetization chapter
+- [`docs/12-deployment-distribution/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/12-deployment-distribution) — distribution + monetization chapter
 - The `monetization-ethics` plugin's full SKILL.md content
 
 **Decide:**
@@ -138,8 +138,8 @@ Each platform has its own cert process. The agent gives you generic patterns; th
 ### Phase 6 — Post-launch ops (ongoing)
 
 **Read:**
-- [`docs/12-deployment-distribution/`](../docs/12-deployment-distribution/) — post-launch chapter
-- [`docs/13-case-studies/`](../docs/13-case-studies/) — case studies of shipped games
+- [`docs/12-deployment-distribution/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/12-deployment-distribution) — post-launch chapter
+- [`docs/13-case-studies/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/13-case-studies) — case studies of shipped games
 
 **Set up:**
 

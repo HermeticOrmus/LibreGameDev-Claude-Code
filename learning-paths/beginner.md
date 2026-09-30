@@ -15,8 +15,8 @@ You've never shipped a game. You want to understand the discipline before pickin
 ### Phase 1 — Foundation (1-2 hours)
 
 **Read:**
-- [`docs/01-getting-started/`](../docs/01-getting-started/) — full section, in order
-- [`docs/02-core-game-concepts/`](../docs/02-core-game-concepts/) — at minimum the game-loop and state-management chapters
+- [`docs/01-getting-started/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/01-getting-started) — full section, in order
+- [`docs/02-core-game-concepts/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/02-core-game-concepts) — at minimum the game-loop and state-management chapters
 
 **Then ask the `/game-arch` agent:**
 
@@ -33,21 +33,21 @@ The agent should walk you through fixed timestep, the update-render split, entit
 **Walk the [QUICK_START.md](../QUICK_START.md)** in this repo. Build the 2D space shooter prototype. Don't skip steps.
 
 **Read:**
-- [`docs/03-graphics-rendering/canvas-2d-rendering.md`](../docs/03-graphics-rendering/canvas-2d-rendering.md) — even if you use an engine, the concepts transfer
-- [`docs/03-graphics-rendering/particle-systems.md`](../docs/03-graphics-rendering/particle-systems.md) — pooling pattern shows up everywhere
+- [`docs/03-graphics-rendering/canvas-2d-rendering.md`](https://github.com/HermeticOrmus/claude-code-game-development/blob/main/docs/03-graphics-rendering/canvas-2d-rendering.md) — even if you use an engine, the concepts transfer
+- [`docs/03-graphics-rendering/particle-systems.md`](https://github.com/HermeticOrmus/claude-code-game-development/blob/main/docs/03-graphics-rendering/particle-systems.md) — pooling pattern shows up everywhere
 
 ### Phase 3 — Polish (2-3 hours)
 
 Your prototype works. Now make it feel better.
 
 **Read:**
-- [`docs/02-core-game-concepts/`](../docs/02-core-game-concepts/) — game feel chapter
-- [`docs/07-ui-ux/`](../docs/07-ui-ux/) — at minimum the controller-friendly UI patterns
+- [`docs/02-core-game-concepts/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/02-core-game-concepts) — game feel chapter
+- [`docs/07-ui-ux/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/07-ui-ux) — at minimum the controller-friendly UI patterns
 
-**Then ask the `/animation` agent:**
+**Then ask the `/animate` agent:**
 
 ```
-/animation My 2D shooter feels stiff. The player shoots but there's no feedback — bullets just appear and enemies just disappear. Add: bullet muzzle flash, hit particles, screen shake on impact, damage numbers floating up from hit enemies.
+/animate My 2D shooter feels stiff. The player shoots but there's no feedback — bullets just appear and enemies just disappear. Add: bullet muzzle flash, hit particles, screen shake on impact, damage numbers floating up from hit enemies.
 ```
 
 These are "juice" techniques. They take 30 minutes of code to implement and they're the difference between "tech demo" and "game."
@@ -60,7 +60,7 @@ Now you can decide if game dev is for you. Try one of:
 
 **Option B — Engine comparison**: Build the same prototype in a different engine. Compare the developer experience.
 
-**Option C — Read deeper**: [`docs/09-advanced-patterns/`](../docs/09-advanced-patterns/) covers ECS, data-oriented design, command patterns. These patterns matter for shipping games at scale.
+**Option C — Read deeper**: [`docs/09-advanced-patterns/`](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs/09-advanced-patterns) covers ECS, data-oriented design, command patterns. These patterns matter for shipping games at scale.
 
 ## What you've learned
 

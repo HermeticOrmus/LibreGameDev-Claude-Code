@@ -4,13 +4,15 @@ Common scenarios when using LibreGameDev plugins, plus the game-dev debug patter
 
 ## Plugin issues
 
-### Plugins copied but Claude Code doesn't see them
+### Plugins installed but Claude Code doesn't see them
 
 ```bash
-ls ~/.claude/plugins/ | grep -c '^libre-gamedev-'
+claude plugin list | grep -c '@libre-gamedev'
 ```
 
-Should print 20. If not, re-run `./setup.sh`. If commands aren't recognized after install: restart Claude Code.
+Should print 21 after a full `./setup.sh` (20 game dev plugins plus `libre-gamedev-hooks`), or the number you picked with `--only`. If not, re-run `./setup.sh`, or run `/plugin` inside Claude Code to see what is installed and enabled. If commands aren't recognized after install: restart Claude Code.
+
+If you installed an earlier version by copying folders into `~/.claude/plugins/libre-gamedev-*`, Claude Code never loaded those copies. You can delete them and install with `./setup.sh` or `/plugin install`.
 
 ### Agent gives generic answers, not engine-specific
 
@@ -68,7 +70,7 @@ Save versioning wasn't included from Day 1. Two fixes:
    ```
 2. **Migration functions per version**: `migrate_v1_to_v2(data)`, `migrate_v2_to_v3(data)`. Run in sequence on load.
 
-The `/save` agent designs this from the start when asked.
+The `/save-system` agent designs this from the start when asked.
 
 ### "AI feels dumb / repetitive"
 
@@ -78,11 +80,11 @@ Likely a FSM (Finite State Machine) being asked to do behaviors it can't express
 - States have > 3 outgoing transitions
 - Behaviors need to be composable across enemy types
 
-See `docs/04-game-ai/behavior-trees.md` for the full pattern.
+See [`docs/04-game-ai/behavior-trees.md`](https://github.com/HermeticOrmus/claude-code-game-development/blob/main/docs/04-game-ai/behavior-trees.md) in claude-code-game-development for the full pattern.
 
 ### "Game runs fine on my machine, terrible on the target hardware"
 
-Profile on target, not on dev machine. The `/perf-game` agent insists on measurement before optimization.
+Profile on target, not on dev machine. The `/game-perf` agent insists on measurement before optimization.
 
 Common culprits per platform:
 
@@ -99,7 +101,7 @@ Common causes:
 - Loading audio in main thread → blocks frame → audio buffer underruns. Stream long audio.
 - Sample rate mismatch between source and engine → resampling artifacts. Pre-resample at import.
 
-The `/audio` agent diagnoses these.
+The `/game-audio` agent diagnoses these.
 
 ### "Shader compiles but renders wrong"
 
