@@ -5,7 +5,7 @@
 <h1 align="center">LibreGameDev Claude Code</h1>
 
 <p align="center">
-  <em>Game development with Claude Code — 20 specialized plugins, 13 reference sections, 80+ worked examples across Godot, Unity, Unreal, and web</em>
+  <em>Game development for Claude Code — 20 specialized plugins (20 agents, 20 commands, 20 skills) plus optional hooks, across Godot, Unity, Unreal, and web</em>
 </p>
 
 <p align="center">
@@ -18,13 +18,15 @@
   <img src="https://img.shields.io/badge/Claude_Code-aa8142?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code" />
 </p>
 
+> **These game plugins also ship in [claude-code-game-development](https://github.com/HermeticOrmus/claude-code-game-development) v2.0.0**, which is where they keep growing. This pack stays installable as it is.
+
 ---
 
 > **Skills, agents, commands, and a reference manual for shipping games with Claude Code.**
 
 Game development is one of the few domains where the AI-codegen pattern that works for SaaS doesn't quite work. The game loop is timing-sensitive. The rendering pipeline is hostile to "just add abstraction." The state management is its own discipline. Generic LLM coding assistants often produce code that compiles but feels off — wrong physics, wrong feel, wrong feedback loop. **LibreGameDev gives Claude Code the game-specific expertise needed to ship games that feel right.**
 
-Twenty domain plugins. Thirteen reference sections covering every layer from rendering to multiplayer. Worked examples in JavaScript, GDScript, C# (Unity), and C++ (Unreal). The substance you'd expect from a senior gameplay engineer who's also a Claude Code power user.
+Twenty domain plugins, each with an agent, a slash command, and a skill. Worked examples in GDScript, C# (Unity), C++ (Unreal), and Godot shader language. A 13-section reference manual, mostly JavaScript and web-focused, lives in the companion repo [claude-code-game-development](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs). The substance you'd expect from a senior gameplay engineer who's also a Claude Code power user.
 
 ---
 
@@ -40,12 +42,13 @@ For game developers, the refactor cuts two ways. The tedious parts (boilerplate 
 
 | Claude Code component | LibreGameDev provides |
 |---|---|
-| **Plugins** | 20 domain plugins (engine, rendering, AI, audio, networking, more) |
-| **Agents** | Specialist agents per plugin (Unity engineer, Godot engineer, network engineer, etc.) |
-| **Commands** | Quick-access slash commands per plugin |
-| **Skills** | Reusable pattern libraries per plugin |
-| **Reference docs** | 13-section textbook with 80+ worked examples |
-| **Templates** | Project scaffolds for Godot 4, Unity 6, Unreal 5, and Phaser/Pixi web games |
+| **Plugins** | 20 domain plugins (engine, rendering, AI, audio, networking, more) plus the optional `libre-gamedev-hooks` |
+| **Agents** | 20 specialist agents, one per plugin (Unity engineer, Godot engineer, network engineer, etc.) |
+| **Commands** | 20 slash commands, one per plugin, each with focused actions |
+| **Skills** | 20 pattern libraries, one per plugin |
+| **Hooks** | Engine detection at session start, confirmation before touching secrets or signing keys, a check after writes |
+| **Reference docs** | 13-section manual in [claude-code-game-development/docs](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs) |
+| **Templates** | A `CLAUDE.md` template for game projects (`templates/CLAUDE.md`) |
 
 ---
 
@@ -53,91 +56,117 @@ For game developers, the refactor cuts two ways. The tedious parts (boilerplate 
 
 ```
 LibreGameDev-Claude-Code/
-├── 20 plugins                 # one per game-dev subdomain
-├── docs/                      # 13-section reference manual (~1.8 MB)
-│   ├── 01-getting-started
-│   ├── 02-core-game-concepts
-│   ├── 03-graphics-rendering
-│   ├── 04-game-ai
-│   ├── 05-audio-systems
-│   ├── 06-networking-multiplayer
-│   ├── 07-ui-ux
-│   ├── 08-game-engines
-│   ├── 09-advanced-patterns
-│   ├── 10-performance-optimization
-│   ├── 11-testing-qa
-│   ├── 12-deployment-distribution
-│   └── 13-case-studies
+├── .claude-plugin/
+│   └── marketplace.json       # the libre-gamedev marketplace (21 plugins)
+├── plugins/
+│   ├── <plugin>/              # 20 game dev plugins, one per subdomain
+│   │   ├── .claude-plugin/plugin.json
+│   │   ├── agents/<agent>.md
+│   │   ├── commands/<command>.md
+│   │   ├── skills/<skill>/SKILL.md
+│   │   └── README.md
+│   └── libre-gamedev-hooks/   # optional hooks (hooks/hooks.json + scripts)
 ├── learning-paths/            # beginner / intermediate / advanced curated reading orders
-└── templates/                 # project scaffolds per engine
+├── templates/CLAUDE.md        # CLAUDE.md template for a game project
+└── setup.sh                   # installs through the Claude Code plugin CLI
 ```
 
 ---
 
 ## The 20 plugins
 
-Each plugin ships an **agent** (specialist persona), a **command** (quick slash invocation), and a **skill** (reusable pattern library).
+Each plugin ships an **agent** (specialist persona), a **command** (quick slash invocation with focused actions), and a **skill** (reusable pattern library). Descriptions below match each plugin's manifest.
 
 ### Engines
 
-| Plugin | Agent / Command | What it covers |
-|---|---|---|
-| **godot-development** | `/godot` | Godot 4 — GDScript + C#, Node tree, scene composition, signals, resource caching, physics, animation, project structure |
-| **unity-development** | `/unity` | Unity 6 — C# scripting, MonoBehaviour vs. ECS/DOTS, Addressables, Render Pipelines (URP / HDRP), Cinemachine, Timeline |
-| **unreal-engine** | `/unreal` | Unreal 5 — Blueprints + C++, Gameplay Framework, Niagara, Chaos physics, Lumen, Nanite, World Partition |
+| Plugin | Agent | Command | Skill | What it covers |
+|---|---|---|---|---|
+| **godot-development** | `godot-engineer` | `/godot` | `godot-development` | Node tree and scene design, signals, resources, physics, animation, typed GDScript or C#, GDExtension, and GUT tests. |
+| **unity-development** | `unity-engineer` | `/unity` | `unity-development` | MonoBehaviour or DOTS architecture, URP and HDRP, Addressables, the Input System, ScriptableObjects, and idiomatic C#. |
+| **unreal-engine** | `unreal-developer` | `/unreal` | `unreal-patterns` | Gameplay Framework, Blueprint or C++, the Gameplay Ability System, Enhanced Input, replication, and Lumen and Nanite. |
 
 ### Core systems
 
-| Plugin | Agent / Command | What it covers |
-|---|---|---|
-| **game-architecture** | `/game-arch` | ECS vs. OOP, scene management, event systems, dependency injection in games, separation of simulation from rendering |
-| **input-systems** | `/input` | Keyboard + mouse + controller + touch input, rebinding, dead zones, input buffering, fighting-game input parsing |
-| **save-systems** | `/save` | Save formats (binary, JSON, custom), versioning + migration, cloud saves, save-state security |
-| **localization** | `/localize` | i18n in games, RTL languages, font fallbacks, voice-over pipelines, regional content variations |
+| Plugin | Agent | Command | Skill | What it covers |
+|---|---|---|---|---|
+| **game-architecture** | `game-architect` | `/game-arch` | `game-arch-patterns` | Game loops, ECS, event buses, data resources, service locators, scene management, and state stacks. |
+| **input-systems** | `input-engineer` | `/input-system` | `input-patterns` | Action maps, gamepad deadzones, input buffering, rebinding, touch controls, and rumble across Godot, Unity, and Unreal. |
+| **save-systems** | `save-system-engineer` | `/save-system` | `save-system-patterns` | Serialization, save file versioning and migration, atomic writes, slots, settings persistence, and platform cloud saves. |
+| **localization** | `localization-engineer` | `/localize` | `localization-patterns` | String extraction, gettext PO files, ICU plurals, right-to-left layout, CJK font fallback, and pseudo-localization. |
 
 ### Rendering + audio
 
-| Plugin | Agent / Command | What it covers |
-|---|---|---|
-| **shader-programming** | `/shader` | HLSL + GLSL + Slang, lit + unlit shaders, post-processing, screen-space effects, shader graphs |
-| **animation-systems** | `/animation` | Skeletal animation, blend trees, IK, root motion, additive layers, runtime retargeting |
-| **audio-systems** | `/audio` | Spatialized audio, mixer + bus architecture, dynamic music systems, adaptive sound, FMOD + Wwise integration |
-| **ui-game-design** | `/game-ui` | Diegetic vs. non-diegetic UI, controller-friendly menus, accessibility, in-world UI, retained-mode vs. immediate-mode |
+| Plugin | Agent | Command | Skill | What it covers |
+|---|---|---|---|---|
+| **shader-programming** | `shader-programmer` | `/shader` | `shader-patterns` | Godot shading language, vertex and fragment stages, common effects, post-processing, and shader performance. |
+| **animation-systems** | `animation-engineer` | `/animate` | `animation-patterns` | Blend trees, state machines, IK, root motion, and animation events across Godot AnimationTree, Unity Animator, and Unreal AnimGraph. |
+| **audio-systems** | `game-audio-engineer` | `/game-audio` | `audio-patterns` | Bus architecture, spatial audio, dynamic music, sound pooling, and FMOD or Wwise integration. |
+| **ui-game-design** | `game-ui-designer` | `/game-ui` | `game-ui-patterns` | HUDs, menu stacks, inventory grids, dialogue boxes, settings screens, and accessibility with Godot Control nodes. |
 
 ### Gameplay
 
-| Plugin | Agent / Command | What it covers |
-|---|---|---|
-| **ai-game-behavior** | `/game-ai` | Behavior trees, GOAP, FSMs, utility AI, navigation meshes, sensor systems, group behaviors |
-| **physics-simulation** | `/physics` | Rigid body, soft body, cloth, fluids, raycasts, character controllers, deterministic physics for multiplayer |
-| **procedural-generation** | `/procgen` | Wave Function Collapse, noise (Perlin/Simplex/Worley), L-systems, dungeon generation, terrain generation |
-| **level-design** | `/level` | Whitebox to final, pacing, encounter design, environmental storytelling, level streaming |
+| Plugin | Agent | Command | Skill | What it covers |
+|---|---|---|---|---|
+| **ai-game-behavior** | `game-ai-engineer` | `/game-ai` | `game-ai-patterns` | Behavior trees, state machines, utility AI, GOAP, navmesh pathfinding, and perception systems. |
+| **physics-simulation** | `physics-engineer` | `/physics` | `physics-patterns` | Body types, collision layers, character controllers, raycasts, triggers, joints, and physics performance in Godot and Unity. |
+| **procedural-generation** | `procgen-engineer` | `/procgen` | `procgen-patterns` | Noise terrain, BSP and cellular automata dungeons, Wave Function Collapse, seeded randomness, and solvability checks. |
+| **level-design** | `level-designer` | `/level-design` | `level-design-patterns` | Greyboxing, TileMaps, modular kits, navmesh baking, level streaming, and environmental storytelling. |
 
 ### Quality + ops
 
-| Plugin | Agent / Command | What it covers |
+| Plugin | Agent | Command | Skill | What it covers |
+|---|---|---|---|---|
+| **playtesting** | `playtest-coordinator` | `/playtest` | `playtest-patterns` | Session design, observation protocols, telemetry schemas, death heatmaps, funnels, and A/B tests. |
+| **performance-optimization** | `game-perf-engineer` | `/game-perf` | `game-perf-patterns` | Profiling methodology, draw call batching, LODs, occlusion culling, object pooling, and GDScript hot path fixes. |
+| **asset-pipelines** | `asset-pipeline-engineer` | `/assets` | `asset-pipeline-patterns` | Import settings, texture atlasing, LOD generation, audio compression, and CI asset validation for Godot and Unity. |
+| **multiplayer-networking** | `network-engineer` | `/multiplayer` | `multiplayer-networking` | Rollback, lockstep, client prediction with reconciliation, lag compensation, bandwidth budgets, NAT traversal, and Godot or Unity networking. |
+| **monetization-ethics** | `monetization-advisor` | `/monetize` | `ethical-monetization-patterns` | Dark pattern audits, cosmetics-only stores, fair battle passes, platform IAP flows, and player spending protection. |
+
+### Optional hooks
+
+| Plugin | Events | What it does |
 |---|---|---|
-| **playtesting** | `/playtest` | Playtest planning, telemetry capture, heatmap analysis, A/B testing in games, retention funnels |
-| **performance-optimization** | `/perf-game` | Frame budget analysis, draw call batching, occlusion culling, LODs, GPU profiling per engine, mobile-specific patterns |
-| **asset-pipelines** | `/assets` | Import settings, atlasing, compression formats per platform, asset bundles, hot reload |
-| **multiplayer-networking** | `/multiplayer` | Rollback netcode, lockstep, client-side prediction, lag compensation, dedicated server vs. P2P, matchmaking |
-| **monetization-ethics** | `/monetize` | Ethical free-to-play patterns, IAP integration, ads SDK comparison, predatory pattern detection, regional regulations |
+| **libre-gamedev-hooks** | `SessionStart`, `PreToolUse`, `PostToolUse` | Prints one line of context when the project is Godot, Unity, Unreal, or a web game; asks before a tool touches `.env` files, keys, Android keystores, or Godot export credentials, and before `rm -rf` or force pushes; flags empty writes and reminds once per session to run the tests. See [its README](plugins/libre-gamedev-hooks/README.md). |
 
 ---
 
 ## Quick start
+
+### Install from Claude Code
+
+```
+/plugin marketplace add HermeticOrmus/LibreGameDev-Claude-Code
+/plugin install godot-development@libre-gamedev
+```
+
+Install any other plugin the same way, by its name from the tables above plus `@libre-gamedev`. The same from a terminal:
+
+```bash
+claude plugin marketplace add HermeticOrmus/LibreGameDev-Claude-Code
+claude plugin install godot-development@libre-gamedev
+```
+
+Optional hooks (engine detection, confirmation before touching secrets or signing keys): `/plugin install libre-gamedev-hooks@libre-gamedev`.
+
+### Install from a checkout
 
 ```bash
 # Clone
 git clone https://github.com/HermeticOrmus/LibreGameDev-Claude-Code.git ~/projects/LibreGameDev-Claude-Code
 cd ~/projects/LibreGameDev-Claude-Code
 
-# Install all 20 plugins into Claude Code
+# Install all 21 plugins (the 20 game dev plugins plus libre-gamedev-hooks)
 ./setup.sh
 
 # Or install just the plugins you need
 ./setup.sh --only godot-development,multiplayer-networking,shader-programming
+
+# See every plugin, or remove the pack
+./setup.sh --list
+./setup.sh --uninstall
 ```
+
+`setup.sh` registers the checkout as the `libre-gamedev` marketplace and installs through `claude plugin install`, so it needs the `claude` CLI and `jq`. Restart Claude Code after installing.
 
 Then in any Claude Code session at your game project root:
 
@@ -151,7 +180,7 @@ See [QUICK_START.md](QUICK_START.md) for a 30-minute walkthrough that takes you 
 
 ## The reference manual
 
-The `docs/` folder is a full 13-section reference covering the depth of modern game development. Each section has 5-8 in-depth files with code examples in multiple languages. Use as:
+The 13-section reference manual lives in [claude-code-game-development/docs](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs): 80 files, each section a README plus topic chapters, with most examples in JavaScript for web games. Use as:
 
 - **Lookup** when the agent says "I'd use a behavior tree here" and you want to read the full pattern
 - **Onboarding** for new team members — point them at relevant sections in reading order via the learning paths
@@ -159,17 +188,19 @@ The `docs/` folder is a full 13-section reference covering the depth of modern g
 
 Highlights by section:
 
-- **`03-graphics-rendering`** — canvas 2D rendering, lighting + shadows, particle systems (with object pooling), post-processing effects
-- **`04-game-ai`** — behavior trees, adaptive difficulty, GOAP, utility AI, navmesh, perception systems
-- **`06-networking-multiplayer`** — rollback netcode, lockstep determinism, client prediction, lag compensation, server authority models
-- **`09-advanced-patterns`** — entity-component systems, data-oriented design, event sourcing in games, command pattern for undo
-- **`10-performance-optimization`** — frame budget, draw call reduction, GPU profiling, mobile-specific optimizations
+- **`03-graphics-rendering`**: canvas 2D rendering, WebGL basics, sprite management, lighting and shadows, particle systems, post-processing effects, shader programming
+- **`04-game-ai`**: behavior trees, finite state machines, pathfinding, NPC behaviors, adaptive difficulty, procedural generation
+- **`06-networking-multiplayer`**: client-server architecture, state synchronization, lag compensation, WebSocket implementation, matchmaking, anti-cheat
+- **`09-advanced-patterns`**: entity-component systems, event-driven architecture, dependency injection, object pooling, spatial partitioning, save/load systems
+- **`10-performance-optimization`**: profiling and debugging, rendering optimization, memory management, asset loading, mobile optimization, Web Worker parallelism
+
+For rollback, lockstep, GOAP, and utility AI, the `multiplayer-networking` and `ai-game-behavior` plugins in this pack carry the patterns directly.
 
 ---
 
 ## Learning paths
 
-The repo is structured by experience level. Each learning path is a **curated reading order through the reference docs**, not separate content.
+The repo is structured by experience level. Each learning path is a **curated reading order through the [reference docs](https://github.com/HermeticOrmus/claude-code-game-development/tree/main/docs)**, paired with prompts for the plugins here, not separate content.
 
 ### Beginner — *"I want to make my first game with Claude Code"*
 
@@ -200,6 +231,12 @@ You're going to release. Now multiplayer netcode, real performance optimization,
 - **Skill level**: experienced programmers new to games (most useful) through senior gameplay engineers (still useful as a reference)
 
 LibreGameDev plugins do not depend on any specific game engine being installed — the plugins are documentation + prompt-engineering, not engine-specific tooling.
+
+---
+
+## Feedback
+
+Starred this? Tell us what worked and what is missing: [open a feedback issue](https://github.com/HermeticOrmus/LibreGameDev-Claude-Code/issues/new?template=feedback.yml). Every piece of feedback gets an answer, and changes that come from it are credited in the release notes.
 
 ---
 
